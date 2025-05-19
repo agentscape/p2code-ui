@@ -1,0 +1,69 @@
+{
+  "externalId": "",
+  "description": "",
+  "category": "",
+  "priority": "",
+  "notificationContact": "",
+  "orderDate": "2025-05-16T08:43:38.110Z",
+  "state": "pending",
+  "requestedStartDate": "2025-05-16T08:43:38.109Z",
+  "requestedCompletionDate": "2025-05-16T08:43:38.109Z",
+  "serviceOrderItem": [
+    {
+      "service": {
+        "id": "bb4f3d66-5350-49ea-8b31-ff325f149200",
+        "name": "service-spec-end-user-cfs",
+        "category": "",
+        "serviceType": "",
+        "isServiceEnabled": "",
+        "state": "",
+        "serviceSpecification": "",
+        "serviceCharacteristic": [
+          {
+            "name": "Service package manager",
+            "value": "",
+            "valueType": "ENUM"
+          },
+          {
+            "name": "Kubernetes Service Id",
+            "value": "",
+            "valueType": "TEXT"
+          },
+          {
+            "name": "Service artifact identifier in service registry/repository",
+            "value": "",
+            "valueType": "TEXT"
+          },
+          {
+            "name": "Service name",
+            "value": "",
+            "valueType": "TEXT"
+          },
+          {
+            "name": "Helm Package Configuration",
+            "value": "",
+            "valueType": "TEXT"
+          },
+          {
+            "name": "Service artifact version",
+            "value": "",
+            "valueType": "TEXT"
+          },
+          {
+            "name": "Base service registry/repository URL",
+            "value": "",
+            "valueType": "TEXT"
+          },
+          {
+            "name": "Cluster Manager",
+            "value": "",
+            "valueType": "ENUM"
+          }
+        ]
+      },
+      "action": "add",
+      "quantity": "",
+      "id": "v5iv41zpr"
+    }
+  ]
+}

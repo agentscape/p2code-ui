@@ -1,0 +1,1679 @@
+{
+  "serviceCatalog": [
+    {
+      "id": "iot-catalog-001",
+      "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCatalog/iot-catalog-001",
+      "name": "IoT Service Catalog",
+      "description": "A catalog containing IoT service offerings like sensors, connectivity, and device management.",
+      "lastUpdate": "2025-03-07T10:00:00Z",
+      "lifecycleStatus": "Launched",
+      "version": "1.0",
+      "validFor": {
+        "startDateTime": "2025-01-01T00:00:00Z",
+        "endDateTime": "2030-12-31T23:59:59Z"
+      },
+      "category": [
+        {
+          "id": "iot-devices",
+          "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCategory/iot-devices",
+          "name": "IoT Devices",
+          "@referredType": "ServiceCategory"
+        },
+        {
+          "id": "connectivity-services",
+          "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCategory/connectivity-services",
+          "name": "Connectivity Services",
+          "@referredType": "ServiceCategory"
+        }
+      ],
+      "relatedParty": [
+        {
+          "id": "vendor-001",
+          "href": "https://api.example.com/tmf-api/partyManagement/v4/organization/vendor-001",
+          "name": "SmartThings Inc.",
+          "role": "CatalogProvider",
+          "@type": "RelatedParty",
+          "@referredType": "Organization",
+          "@schemaLocation": "https://api.example.com/tmf-api/schema/EngagedParty/RelatedParty.schema.json"
+        }
+      ],
+      "@type": "ServiceCatalog",
+      "@baseType": "Catalog",
+      "@schemaLocation": "https://api.example.com/tmf-api/schema/Service/ServiceCatalog.schema.json"
+    }
+  ],
+  "serviceCategory": [
+    {
+      "id": "iot-devices",
+      "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCategory/iot-devices",
+      "name": "IoT Devices",
+      "description": "A category for all IoT-related device services, such as sensors, gateways, and controllers.",
+      "version": "1.0",
+      "lastUpdate": "2025-03-07T09:00:00Z",
+      "lifecycleStatus": "Active",
+      "validFor": {
+        "startDateTime": "2025-01-01T00:00:00Z",
+        "endDateTime": "2030-01-01T00:00:00Z"
+      },
+      "isRoot": true,
+      "parentId": null,
+      "subCategory": [],
+      "serviceCandidate": [
+        {
+          "id": "temp-sensor-candidate",
+          "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCandidate/temp-sensor-candidate",
+          "name": "Temperature Sensor Service",
+          "version": "1.0",
+          "@referredType": "ServiceCandidate"
+        }
+      ],
+      "@type": "ServiceCategory",
+      "@baseType": "Category",
+      "@schemaLocation": "https://api.example.com/tmf-api/schema/Service/ServiceCategory.schema.json"
+    },
+    {
+      "id": "connectivity-services",
+      "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCategory/connectivity-services",
+      "name": "Connectivity Services",
+      "description": "Category including broadband, 5G, and LoRaWAN connectivity offers.",
+      "version": "2.0",
+      "lastUpdate": "2025-03-01T15:30:00Z",
+      "lifecycleStatus": "Active",
+      "validFor": {
+        "startDateTime": "2025-03-01T00:00:00Z",
+        "endDateTime": "2029-12-31T23:59:59Z"
+      },
+      "isRoot": true,
+      "parentId": null,
+      "subCategory": [],
+      "serviceCandidate": [
+        {
+          "id": "5g-connectivity-candidate",
+          "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCandidate/5g-connectivity-candidate",
+          "name": "5G Enterprise Connectivity",
+          "version": "2.2",
+          "@referredType": "ServiceCandidate"
+        },
+        {
+          "id": "lorawan-connectivity-candidate",
+          "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCandidate/lorawan-connectivity-candidate",
+          "name": "LoRaWAN Sensor Network",
+          "version": "1.1",
+          "@referredType": "ServiceCandidate"
+        }
+      ],
+      "@type": "ServiceCategory",
+      "@baseType": "Category",
+      "@schemaLocation": "https://api.example.com/tmf-api/schema/Service/ServiceCategory.schema.json"
+    }
+  ],
+  "serviceCandidate": [
+    {
+      "id": "temp-sensor-candidate",
+      "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCandidate/temp-sensor-candidate",
+      "name": "Temperature Sensor Service",
+      "description": "Provides temperature data collection and reporting capabilities for industrial IoT use cases.",
+      "version": "1.0",
+      "lifecycleStatus": "Active",
+      "lastUpdate": "2025-03-01T15:30:00Z",
+      "validFor": {
+        "startDateTime": "2025-01-01T00:00:00Z",
+        "endDateTime": "2029-12-31T23:59:59Z"
+      },
+      "category": [
+        {
+          "id": "iot-devices",
+          "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCategory/iot-devices",
+          "name": "IoT Devices",
+          "@referredType": "ServiceCategory"
+        }
+      ],
+      "serviceSpecification": {
+        "id": "temp-sensor-spec",
+        "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceSpecification/temp-sensor-spec",
+        "name": "Temperature Sensor Specification",
+        "version": "1.0",
+        "@referredType": "ServiceSpecification",
+        "@type": "ServiceSpecificationRef"
+      },
+      "@type": "ServiceCandidate",
+      "@baseType": "ServiceCandidate",
+      "@schemaLocation": "https://api.example.com/tmf-api/schema/Service/ServiceCandidate.schema.json"
+    },
+    {
+      "id": "5g-connectivity-candidate",
+      "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCandidate/5g-connectivity-candidate",
+      "name": "5G Enterprise Connectivity",
+      "description": "High-bandwidth, low-latency 5G service for enterprise IoT and cloud applications.",
+      "version": "2.2",
+      "lifecycleStatus": "Active",
+      "lastUpdate": "2025-03-01T15:30:00Z",
+      "validFor": {
+        "startDateTime": "2025-02-01T00:00:00Z",
+        "endDateTime": "2030-01-01T00:00:00Z"
+      },
+      "category": [
+        {
+          "id": "connectivity-services",
+          "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCategory/connectivity-services",
+          "name": "Connectivity Services",
+          "@referredType": "ServiceCategory"
+        }
+      ],
+      "serviceSpecification": {
+        "id": "5g-spec",
+        "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceSpecification/5g-spec",
+        "name": "5G Service Specification",
+        "version": "2.2",
+        "@referredType": "ServiceSpecification",
+        "@type": "ServiceSpecificationRef"
+      },
+      "@type": "ServiceCandidate",
+      "@baseType": "ServiceCandidate",
+      "@schemaLocation": "https://api.example.com/tmf-api/schema/Service/ServiceCandidate.schema.json"
+    },
+    {
+      "id": "lorawan-connectivity-candidate",
+      "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCandidate/lorawan-connectivity-candidate",
+      "name": "LoRaWAN Sensor Network",
+      "description": "Wide-area connectivity for battery-powered sensors over LoRaWAN protocol.",
+      "version": "1.1",
+      "lifecycleStatus": "Active",
+      "lastUpdate": "2025-03-01T15:30:00Z",
+      "validFor": {
+        "startDateTime": "2025-03-01T00:00:00Z",
+        "endDateTime": "2028-12-31T23:59:59Z"
+      },
+      "category": [
+        {
+          "id": "connectivity-services",
+          "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceCategory/connectivity-services",
+          "name": "Connectivity Services",
+          "@referredType": "ServiceCategory"
+        }
+      ],
+      "serviceSpecification": {
+        "id": "lorawan-spec",
+        "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceSpecification/lorawan-spec",
+        "name": "LoRaWAN Connectivity Specification",
+        "version": "1.1",
+        "@referredType": "ServiceSpecification",
+        "@type": "ServiceSpecificationRef"
+      },
+      "@type": "ServiceCandidate",
+      "@baseType": "ServiceCandidate",
+      "@schemaLocation": "https://api.example.com/tmf-api/schema/Service/ServiceCandidate.schema.json"
+    }
+  ],
+  "serviceSpecification": [
+    {
+      "id": "temp-sensor-spec",
+      "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceSpecification/temp-sensor-spec",
+      "name": "Temperature Sensor Specification",
+      "version": "1.0",
+      "description": "Defines characteristics for a temperature sensor service.",
+      "lifecycleStatus": "Active",
+      "lastUpdate": "2025-03-01T15:30:00Z",
+      "isBundle": false,
+      "validFor": {
+        "startDateTime": "2025-01-01T00:00:00Z",
+        "endDateTime": "2030-01-01T00:00:00Z"
+      },
+      "specCharacteristic": [
+        {
+          "id": "sampling-rate",
+          "name": "Sampling Rate",
+          "description": "Interval in seconds between temperature readings.",
+          "valueType": "number",
+          "configurable": true,
+          "isUnique": false,
+          "minCardinality": 1,
+          "maxCardinality": 1,
+          "characteristicValueSpecification": [
+            {
+              "valueType": "number",
+              "value": 60,
+              "isDefault": true,
+              "rangeInterval": "closed"
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        },
+        {
+          "id": "reporting-interval",
+          "name": "Reporting Interval",
+          "description": "How often data is reported to the platform.",
+          "valueType": "string",
+          "configurable": true,
+          "characteristicValueSpecification": [
+            {
+              "value": "5min",
+              "isDefault": false
+            },
+            {
+              "value": "15min",
+              "isDefault": true
+            },
+            {
+              "value": "30min",
+              "isDefault": false
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        }
+      ],
+      "@type": "ServiceSpecification",
+      "@baseType": "ServiceSpecification",
+      "@schemaLocation": "https://api.example.com/tmf-api/schema/Service/ServiceSpecification.schema.json"
+    },
+    {
+      "id": "5g-spec",
+      "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceSpecification/5g-spec",
+      "name": "5G Service Specification",
+      "version": "2.2",
+      "description": "Defines parameters for enterprise 5G connectivity.",
+      "lifecycleStatus": "Active",
+      "lastUpdate": "2025-03-01T15:30:00Z",
+      "isBundle": false,
+      "validFor": {
+        "startDateTime": "2025-01-01T00:00:00Z",
+        "endDateTime": "2030-01-01T00:00:00Z"
+      },
+      "specCharacteristic": [
+        {
+          "id": "bandwidth",
+          "name": "Bandwidth",
+          "valueType": "string",
+          "configurable": true,
+          "characteristicValueSpecification": [
+            {
+              "value": "100Mbps",
+              "isDefault": true
+            },
+            {
+              "value": "1Gbps",
+              "isDefault": false
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        },
+        {
+          "id": "latency",
+          "name": "Latency Requirement",
+          "valueType": "string",
+          "configurable": true,
+          "characteristicValueSpecification": [
+            {
+              "value": "Low",
+              "isDefault": true
+            },
+            {
+              "value": "Ultra Low",
+              "isDefault": false
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        }
+      ],
+      "@type": "ServiceSpecification",
+      "@baseType": "ServiceSpecification",
+      "@schemaLocation": "https://api.example.com/tmf-api/schema/Service/ServiceSpecification.schema.json"
+    },
+    {
+      "id": "lorawan-spec",
+      "href": "https://api.example.com/tmf-api/serviceCatalogManagement/v4/serviceSpecification/lorawan-spec",
+      "name": "LoRaWAN Connectivity Specification",
+      "version": "1.1",
+      "description": "Specifies characteristics for LoRaWAN-based low-power network service.",
+      "lifecycleStatus": "Active",
+      "lastUpdate": "2025-03-01T15:30:00Z",
+      "isBundle": false,
+      "validFor": {
+        "startDateTime": "2025-03-01T00:00:00Z",
+        "endDateTime": "2029-03-01T00:00:00Z"
+      },
+      "specCharacteristic": [
+        {
+          "id": "coverage",
+          "name": "Coverage Type",
+          "valueType": "string",
+          "configurable": true,
+          "characteristicValueSpecification": [
+            {
+              "value": "Urban",
+              "isDefault": true
+            },
+            {
+              "value": "Rural",
+              "isDefault": false
+            },
+            {
+              "value": "Indoor",
+              "isDefault": false
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        },
+        {
+          "id": "uplink-limit",
+          "name": "Uplink Message Limit",
+          "valueType": "number",
+          "configurable": true,
+          "characteristicValueSpecification": [
+            {
+              "value": 100,
+              "isDefault": true
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        }
+      ],
+      "@type": "ServiceSpecification",
+      "@baseType": "ServiceSpecification",
+      "@schemaLocation": "https://api.example.com/tmf-api/schema/Service/ServiceSpecification.schema.json"
+    }
+  ],
+  "service": [
+    {
+      "id": "svc-1001",
+      "href": "https://api.example.com/serviceInventory/v4/service/svc-1001",
+      "name": "Temperature Monitoring Service",
+      "category": "CustomerFacingService",
+      "description": "Provides temperature sensor data through an IoT gateway.",
+      "endDate": "2025-12-31T23:59:59Z",
+      "hasStarted": true,
+      "isBundle": false,
+      "isServiceEnabled": true,
+      "isStateful": true,
+      "serviceDate": "2025-01-01T00:00:00Z",
+      "serviceType": "IoT Sensor",
+      "startDate": "2025-01-01T08:00:00Z",
+      "startMode": "3",
+      "state": "active",
+      "serviceSpecification": {
+        "id": "spec-1001",
+        "href": "https://api.example.com/serviceCatalog/v4/serviceSpecification/spec-1001",
+        "name": "Sensor Service Specification",
+        "version": "1.0",
+        "@referredType": "ServiceSpecification"
+      },
+      "serviceCharacteristic": [
+        {
+          "name": "SamplingFrequency",
+          "value": "10s",
+          "valueType": "string"
+        },
+        {
+          "name": "MeasurementUnit",
+          "value": "Celsius",
+          "valueType": "string"
+        }
+      ],
+      "relatedParty": [
+        {
+          "id": "party-001",
+          "href": "https://api.example.com/party/party-001",
+          "name": "Example Corp",
+          "role": "Customer",
+          "@referredType": "Organization"
+        }
+      ],
+      "feature": [
+        {
+          "id": "ftr-001",
+          "name": "Remote Access",
+          "isBundle": false,
+          "isEnabled": true,
+          "featureCharacteristic": [
+            {
+              "name": "Protocol",
+              "value": "MQTT",
+              "valueType": "string"
+            }
+          ]
+        }
+      ],
+      "place": [
+        {
+          "id": "plc-001",
+          "href": "https://api.example.com/place/plc-001",
+          "name": "Berlin IoT Lab",
+          "role": "installation"
+        }
+      ],
+      "note": [
+        {
+          "author": "admin@example.com",
+          "date": "2025-01-02T10:15:00Z",
+          "text": "Initial deployment complete."
+        }
+      ],
+      "supportingResource": [
+        {
+          "id": "res-9001",
+          "href": "https://api.example.com/resource/res-9001",
+          "name": "Gateway A",
+          "@referredType": "PhysicalResource"
+        }
+      ],
+      "supportingService": [
+        {
+          "id": "svc-1000",
+          "href": "https://api.example.com/serviceInventory/v4/service/svc-1000",
+          "name": "Sensor Connectivity Service"
+        }
+      ]
+    },
+    {
+      "id": "svc-2002",
+      "href": "https://api.example.com/serviceInventory/v4/service/svc-2002",
+      "name": "Smart Home Security Monitoring",
+      "description": "Real-time security alerts and camera feeds for smart homes.",
+      "category": "CustomerFacingService",
+      "state": "active",
+      "hasStarted": true,
+      "isServiceEnabled": true,
+      "isStateful": true,
+      "isBundle": true,
+      "serviceType": "Security",
+      "startMode": "automatic",
+      "startDate": "2025-04-01T08:00:00Z",
+      "endDate": null,
+      "serviceDate": "2025-04-01T08:00:00Z",
+      "serviceSpecification": {
+        "id": "spec-2002",
+        "href": "https://api.example.com/serviceCatalog/v4/serviceSpecification/spec-2002",
+        "name": "Smart Home Security Spec",
+        "version": "2.0",
+        "@referredType": "ServiceSpecification"
+      },
+      "serviceCharacteristic": [
+        {
+          "id": "char-01",
+          "name": "CameraResolution",
+          "value": "1080p",
+          "valueType": "string"
+        },
+        {
+          "id": "char-02",
+          "name": "MotionDetection",
+          "value": true,
+          "valueType": "boolean"
+        }
+      ],
+      "relatedParty": [
+        {
+          "id": "cust-002",
+          "href": "https://api.example.com/partyManagement/v4/individual/cust-002",
+          "name": "Jane Smith",
+          "role": "Customer",
+          "@referredType": "Individual",
+          "@type": "RelatedParty"
+        }
+      ],
+      "feature": [
+        {
+          "id": "feat-02",
+          "name": "Night Vision",
+          "isEnabled": true,
+          "isBundle": false,
+          "featureCharacteristic": [
+            {
+              "name": "InfraredRange",
+              "value": "20m",
+              "valueType": "string"
+            }
+          ]
+        }
+      ],
+      "place": [
+        {
+          "id": "place-02",
+          "href": "https://api.example.com/place/place-02",
+          "name": "Customer Residence - NY",
+          "role": "installation",
+          "@referredType": "GeographicAddress"
+        }
+      ],
+      "supportingResource": [
+        {
+          "id": "res-1002",
+          "href": "https://api.example.com/resourceInventory/v4/resource/res-1002",
+          "name": "Indoor Camera Model X",
+          "@referredType": "PhysicalResource"
+        }
+      ],
+      "supportingService": [
+        {
+          "id": "svc-1003",
+          "href": "https://api.example.com/serviceInventory/v4/service/svc-1003",
+          "name": "Internet Access Service",
+          "@referredType": "Service"
+        }
+      ],
+      "note": [
+        {
+          "id": "note-1002",
+          "author": "tech@example.com",
+          "date": "2025-04-01T09:30:00Z",
+          "text": "Service activated remotely.",
+          "@type": "Note"
+        }
+      ],
+      "@type": "Service",
+      "@baseType": "Entity",
+      "@schemaLocation": "https://open-api.tmforum.org/TMF638_ServiceInventoryManagement/schema/Service.schema.json"
+    },
+    {
+      "id": "svc-3003",
+      "href": "https://api.example.com/serviceInventory/v4/service/svc-3003",
+      "name": "Enterprise VPN Access",
+      "description": "Secure VPN service connecting remote employees to the enterprise network.",
+      "category": "Connectivity",
+      "state": "active",
+      "hasStarted": true,
+      "isServiceEnabled": true,
+      "isStateful": true,
+      "isBundle": false,
+      "serviceType": "VPN",
+      "startMode": "manual",
+      "startDate": "2025-04-01T10:00:00Z",
+      "endDate": null,
+      "serviceDate": "2025-04-01T10:00:00Z",
+      "serviceSpecification": {
+        "id": "spec-3003",
+        "href": "https://api.example.com/serviceCatalog/v4/serviceSpecification/spec-3003",
+        "name": "VPN Service Specification",
+        "version": "3.1",
+        "@referredType": "ServiceSpecification"
+      },
+      "serviceCharacteristic": [
+        {
+          "id": "vpn-protocol",
+          "name": "VPNProtocol",
+          "value": "IPSec",
+          "valueType": "string"
+        },
+        {
+          "id": "bandwidth",
+          "name": "MaxBandwidth",
+          "value": "200Mbps",
+          "valueType": "string"
+        },
+        {
+          "id": "redundancy",
+          "name": "RedundancyEnabled",
+          "value": true,
+          "valueType": "boolean"
+        }
+      ],
+      "relatedParty": [
+        {
+          "id": "org-789",
+          "href": "https://api.example.com/partyManagement/v4/organization/org-789",
+          "name": "Global Enterprises Ltd.",
+          "role": "Customer",
+          "@referredType": "Organization",
+          "@type": "RelatedParty"
+        }
+      ],
+      "feature": [
+        {
+          "id": "feat-3003",
+          "name": "Auto Failover",
+          "isEnabled": true,
+          "isBundle": false,
+          "featureCharacteristic": [
+            {
+              "name": "FailoverDelay",
+              "value": "2s",
+              "valueType": "string"
+            }
+          ]
+        }
+      ],
+      "place": [
+        {
+          "id": "hq-london",
+          "href": "https://api.example.com/place/hq-london",
+          "name": "London Headquarters",
+          "role": "primary-endpoint",
+          "@referredType": "GeographicSite"
+        }
+      ],
+      "supportingResource": [
+        {
+          "id": "router-9003",
+          "href": "https://api.example.com/resourceInventory/v4/resource/router-9003",
+          "name": "Cisco ISR 4451",
+          "@referredType": "PhysicalResource"
+        }
+      ],
+      "supportingService": [],
+      "note": [
+        {
+          "id": "note-3003",
+          "author": "netops@example.com",
+          "date": "2025-04-01T11:00:00Z",
+          "text": "Customer confirmed encryption requirements met.",
+          "@type": "Note"
+        }
+      ],
+      "@type": "Service",
+      "@baseType": "Entity",
+      "@schemaLocation": "https://open-api.tmforum.org/TMF638_ServiceInventoryManagement/schema/Service.schema.json"
+    }
+  ],
+  "serviceOrder": [
+    {
+      "id": "order-001",
+      "href": "https://api.example.com/serviceOrdering/v4/serviceOrder/order-001",
+      "externalId": "ORD-20250326-001",
+      "priority": "1",
+      "description": "Order to activate IoT sensor service",
+      "category": "activation",
+      "requestedStartDate": "2025-03-27T09:00:00Z",
+      "requestedCompletionDate": "2025-03-28T18:00:00Z",
+      "expectedCompletionDate": "2025-03-28T18:00:00Z",
+      "startDate": "2025-03-27T09:00:00Z",
+      "completionDate": null,
+      "cancellationDate": null,
+      "cancellationReason": null,
+      "notificationContact": "support@iotservices.com",
+      "orderDate": "2025-03-26T10:15:00Z",
+      "state": "acknowledged",
+      "relatedParty": [
+        {
+          "id": "cust-001",
+          "href": "https://api.example.com/partyManagement/v4/organization/cust-001",
+          "name": "Acme Corp",
+          "role": "customer",
+          "@referredType": "Organization",
+          "@type": "RelatedParty"
+        }
+      ],
+      "serviceOrderItem": [
+        {
+          "id": "item-001",
+          "action": "add",
+          "service": {
+            "id": "svc-1001",
+            "name": "IoT Sensor Connectivity",
+            "category": "CFS",
+            "serviceType": "IoT",
+            "isServiceEnabled": true,
+            "state": "feasibilityChecked",
+            "serviceCharacteristic": [
+              {
+                "name": "SamplingFrequency",
+                "value": "10s",
+                "valueType": "string"
+              },
+              {
+                "name": "MeasurementUnit",
+                "value": "Celsius",
+                "valueType": "string"
+              }
+            ],
+            "serviceSpecification": {
+              "id": "spec-1001",
+              "href": "https://api.example.com/serviceCatalog/v4/serviceSpecification/spec-1001",
+              "name": "Sensor Service Specification",
+              "version": "1.0",
+              "@referredType": "ServiceSpecification"
+            }
+          },
+          "state": "acknowledged",
+          "appointment": {
+            "id": "appt-001",
+            "href": "https://api.example.com/appointment/v4/appointment/appt-001"
+          },
+          "note": [
+            {
+              "id": "note-001",
+              "author": "jane.doe@example.com",
+              "date": "2025-03-26T10:16:00Z",
+              "text": "Customer requested expedited provisioning.",
+              "@type": "Note"
+            }
+          ],
+          "@type": "ServiceOrderItem"
+        }
+      ],
+      "note": [
+        {
+          "id": "note-002",
+          "author": "support-agent@example.com",
+          "date": "2025-03-26T11:00:00Z",
+          "text": "Assigned to provisioning team.",
+          "@type": "Note"
+        }
+      ],
+      "@type": "ServiceOrder",
+      "@baseType": "Entity",
+      "@schemaLocation": "https://open-api.tmforum.org/TMF641_ServiceOrderingManagement/schema/ServiceOrder.schema.json"
+    },
+    {
+      "id": "0d78",
+      "serviceOrderItem": [
+        {
+          "service": {
+            "id": "svc-3003",
+            "name": "Enterprise VPN Access",
+            "category": "Connectivity",
+            "serviceType": "VPN",
+            "isServiceEnabled": true,
+            "state": "active",
+            "serviceSpecification": {
+              "id": "spec-3003",
+              "href": "https://api.example.com/serviceCatalog/v4/serviceSpecification/spec-3003",
+              "name": "VPN Service Specification",
+              "version": "3.1",
+              "@referredType": "ServiceSpecification"
+            },
+            "serviceCharacteristic": [
+              {
+                "name": "VPNProtocol",
+                "value": "IPSec",
+                "valueType": "string"
+              },
+              {
+                "name": "MaxBandwidth",
+                "value": "200Mbps",
+                "valueType": "string"
+              },
+              {
+                "name": "RedundancyEnabled",
+                "value": "true",
+                "valueType": "boolean"
+              }
+            ]
+          },
+          "action": "add",
+          "quantity": "1",
+          "id": "o4pctkwzk"
+        }
+      ],
+      "externalId": "test",
+      "description": "test",
+      "category": "test",
+      "priority": "test",
+      "notificationContact": "test",
+      "orderDate": "2025-03-28T16:26:39.271Z",
+      "state": "pending"
+    },
+    {
+      "id": "fbef",
+      "requestedStartDate": "2025-04-02T10:34:52.467Z",
+      "requestedCompletionDate": "2025-04-02T10:34:52.467Z",
+      "serviceOrderItem": [
+        {
+          "service": {
+            "id": "svc-2002",
+            "name": "Smart Home Security Monitoring",
+            "category": "CustomerFacingService",
+            "serviceType": "Security",
+            "isServiceEnabled": true,
+            "state": "active",
+            "serviceSpecification": {
+              "id": "spec-2002",
+              "href": "https://api.example.com/serviceCatalog/v4/serviceSpecification/spec-2002",
+              "name": "Smart Home Security Spec",
+              "version": "2.0",
+              "@referredType": "ServiceSpecification"
+            },
+            "serviceCharacteristic": [
+              {
+                "name": "CameraResolution",
+                "value": "1080p",
+                "valueType": "string"
+              },
+              {
+                "name": "MotionDetection",
+                "value": "true",
+                "valueType": "boolean"
+              }
+            ]
+          },
+          "action": "add",
+          "quantity": "",
+          "id": "vihqxu817"
+        }
+      ],
+      "externalId": "test",
+      "description": "test",
+      "category": "test",
+      "priority": "high",
+      "notificationContact": "",
+      "orderDate": "2025-04-02T10:34:43.896Z",
+      "state": "pending"
+    },
+    {
+      "id": "0281",
+      "requestedStartDate": "2025-05-05T06:58:17.962Z",
+      "requestedCompletionDate": "2025-05-05T06:58:17.962Z",
+      "serviceOrderItem": [
+        {
+          "service": {
+            "id": "svc-1001",
+            "name": "Temperature Monitoring Service",
+            "category": "CustomerFacingService",
+            "serviceType": "IoT Sensor",
+            "isServiceEnabled": true,
+            "state": "active",
+            "serviceSpecification": {
+              "id": "spec-1001",
+              "href": "https://api.example.com/serviceCatalog/v4/serviceSpecification/spec-1001",
+              "name": "Sensor Service Specification",
+              "version": "1.0",
+              "@referredType": "ServiceSpecification"
+            },
+            "serviceCharacteristic": [
+              {
+                "name": "SamplingFrequency",
+                "value": "10s",
+                "valueType": "string"
+              },
+              {
+                "name": "MeasurementUnit",
+                "value": "Celsius",
+                "valueType": "string"
+              }
+            ]
+          },
+          "action": "add",
+          "quantity": "1",
+          "id": "wvtlb67yj"
+        }
+      ],
+      "externalId": "test",
+      "description": "test",
+      "category": "test",
+      "priority": "high",
+      "notificationContact": "",
+      "orderDate": "2025-05-05T06:58:14.915Z",
+      "state": "pending"
+    }
+  ],
+  "cancelServiceOrder": [
+    {
+      "id": "cancel-001",
+      "href": "https://api.example.com/serviceOrdering/v4/cancelServiceOrder/cancel-001",
+      "cancellationReason": "Customer no longer requires service",
+      "cancellationDate": "2025-04-02T10:30:00Z",
+      "state": "acknowledged",
+      "requestedCancellationDate": "2025-04-02T10:00:00Z",
+      "relatedParty": [
+        {
+          "id": "cust-001",
+          "href": "https://api.example.com/partyManagement/v4/organization/cust-001",
+          "name": "Acme Corp",
+          "role": "Customer",
+          "@referredType": "Organization",
+          "@type": "RelatedParty"
+        }
+      ],
+      "cancellationItem": [
+        {
+          "id": "cancel-item-001",
+          "serviceOrderItem": {
+            "id": "item-001",
+            "serviceOrderId": "order-001",
+            "href": "https://api.example.com/serviceOrdering/v4/serviceOrder/order-001",
+            "@referredType": "ServiceOrderItem"
+          },
+          "reason": "Duplicate request",
+          "state": "acknowledged",
+          "@type": "CancellationItem"
+        }
+      ],
+      "note": [
+        {
+          "id": "note-001",
+          "author": "csr@example.com",
+          "date": "2025-04-02T10:15:00Z",
+          "text": "Cancellation initiated by customer request",
+          "@type": "Note"
+        }
+      ],
+      "@type": "CancelServiceOrder",
+      "@baseType": "Entity",
+      "@schemaLocation": "https://open-api.tmforum.org/TMF641_ServiceOrderingManagement/schema/CancelServiceOrder.schema.json"
+    }
+  ],
+  "resourceCatalog": [
+    {
+      "id": "res-cat-001",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCatalog/res-cat-001",
+      "lastUpdate": "2024-12-01T12:34:56Z",
+      "lifecycleStatus": "active",
+      "name": "IoT Resource Catalog",
+      "description": "A catalog of all IoT-related physical and logical resources",
+      "version": "1.0",
+      "validFor": {
+        "startDateTime": "2024-01-01T00:00:00Z",
+        "endDateTime": "2026-12-31T23:59:59Z"
+      },
+      "category": [
+        {
+          "id": "iot-cat-001",
+          "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCategory/iot-cat-001",
+          "name": "IoT Devices",
+          "version": "1.0",
+          "@referredType": "ResourceCategory"
+        }
+      ],
+      "relatedParty": [
+        {
+          "id": "party-001",
+          "href": "https://example.com/party/party-001",
+          "name": "Catalog Manager",
+          "role": "owner",
+          "@referredType": "Individual"
+        }
+      ],
+      "@baseType": "Catalog",
+      "@type": "ResourceCatalog",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceCatalog.schema.json"
+    }
+  ],
+  "resourceCategory": [
+    {
+      "id": "iot-cat-001",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCategory/iot-cat-001",
+      "name": "IoT Devices",
+      "version": "1.0",
+      "description": "Category for all IoT-related physical and logical resources.",
+      "lifecycleStatus": "active",
+      "isRoot": true,
+      "lastUpdate": "2024-12-01T10:00:00Z",
+      "validFor": {
+        "startDateTime": "2024-01-01T00:00:00Z",
+        "endDateTime": "2026-12-31T23:59:59Z"
+      },
+      "resourceCandidate": [
+        {
+          "id": "rc-iot-001",
+          "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCandidate/rc-iot-001",
+          "name": "Smart Sensor V2",
+          "version": "1.0",
+          "@referredType": "ResourceCandidate"
+        },
+        {
+          "id": "rc-iot-002",
+          "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCandidate/rc-iot-002",
+          "name": "IoT Gateway Hub",
+          "version": "2.3",
+          "@referredType": "ResourceCandidate"
+        }
+      ],
+      "relatedParty": [
+        {
+          "id": "party-123",
+          "href": "https://example.com/party/party-123",
+          "name": "IoT Product Manager",
+          "role": "categoryManager",
+          "@referredType": "Individual"
+        }
+      ],
+      "@type": "ResourceCategory",
+      "@baseType": "Category",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceCategory.schema.json"
+    },
+    {
+      "id": "net-cat-002",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCategory/net-cat-002",
+      "name": "Network Equipment",
+      "version": "2.0",
+      "description": "Category for routers, switches, firewalls, and other network infrastructure equipment.",
+      "lifecycleStatus": "active",
+      "isRoot": false,
+      "parentId": "infra-root-001",
+      "lastUpdate": "2025-03-15T14:22:00Z",
+      "validFor": {
+        "startDateTime": "2025-01-01T00:00:00Z",
+        "endDateTime": "2027-01-01T00:00:00Z"
+      },
+      "resourceCandidate": [
+        {
+          "id": "rc-net-001",
+          "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCandidate/rc-net-001",
+          "name": "Cisco ISR 4451",
+          "version": "4.0",
+          "@referredType": "ResourceCandidate"
+        },
+        {
+          "id": "rc-net-002",
+          "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCandidate/rc-net-002",
+          "name": "Fortinet Firewall 100F",
+          "version": "1.2",
+          "@referredType": "ResourceCandidate"
+        }
+      ],
+      "relatedParty": [
+        {
+          "id": "staff-200",
+          "href": "https://example.com/party/staff-200",
+          "name": "Network Ops Manager",
+          "role": "catalogMaintainer",
+          "@referredType": "Individual"
+        }
+      ],
+      "@type": "ResourceCategory",
+      "@baseType": "Category",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceCategory.schema.json"
+    }
+  ],
+  "resourceCandidate": [
+    {
+      "id": "rc-iot-001",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCandidate/rc-iot-001",
+      "name": "Smart Sensor V2",
+      "version": "1.0",
+      "description": "A low-power temperature and humidity sensor for smart buildings.",
+      "lastUpdate": "2024-11-20T08:00:00Z",
+      "lifecycleStatus": "active",
+      "validFor": {
+        "startDateTime": "2024-01-01T00:00:00Z",
+        "endDateTime": "2026-01-01T00:00:00Z"
+      },
+      "resourceSpecification": {
+        "id": "rs-iot-101",
+        "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-iot-101",
+        "name": "Sensor Spec V2",
+        "version": "1.0",
+        "@referredType": "ResourceSpecification"
+      },
+      "category": [
+        {
+          "id": "iot-cat-001",
+          "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCategory/iot-cat-001",
+          "name": "IoT Devices",
+          "@referredType": "ResourceCategory"
+        }
+      ],
+      "@type": "ResourceCandidate",
+      "@baseType": "Candidate",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceCandidate.schema.json"
+    },
+    {
+      "id": "rc-iot-002",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCandidate/rc-iot-002",
+      "name": "IoT Gateway Hub",
+      "version": "2.3",
+      "description": "Edge device to bridge IoT sensor networks with cloud systems.",
+      "lastUpdate": "2024-12-10T14:45:00Z",
+      "lifecycleStatus": "active",
+      "validFor": {
+        "startDateTime": "2024-06-01T00:00:00Z",
+        "endDateTime": "2027-06-01T00:00:00Z"
+      },
+      "resourceSpecification": {
+        "id": "rs-iot-202",
+        "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-iot-202",
+        "name": "Gateway Device Spec",
+        "version": "2.0",
+        "@referredType": "ResourceSpecification"
+      },
+      "category": [
+        {
+          "id": "iot-cat-001",
+          "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCategory/iot-cat-001",
+          "name": "IoT Devices",
+          "@referredType": "ResourceCategory"
+        }
+      ],
+      "@type": "ResourceCandidate",
+      "@baseType": "Candidate",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceCandidate.schema.json"
+    },
+    {
+      "id": "rc-net-001",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCandidate/rc-net-001",
+      "name": "Cisco ISR 4451",
+      "version": "4.0",
+      "description": "Enterprise-grade integrated services router with high throughput and advanced security.",
+      "lastUpdate": "2025-03-01T09:00:00Z",
+      "lifecycleStatus": "active",
+      "validFor": {
+        "startDateTime": "2025-01-01T00:00:00Z",
+        "endDateTime": "2028-01-01T00:00:00Z"
+      },
+      "resourceSpecification": {
+        "id": "rs-net-301",
+        "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-net-301",
+        "name": "Cisco ISR Spec",
+        "version": "4.0",
+        "@referredType": "ResourceSpecification"
+      },
+      "category": [
+        {
+          "id": "net-cat-002",
+          "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCategory/net-cat-002",
+          "name": "Network Equipment",
+          "@referredType": "ResourceCategory"
+        }
+      ],
+      "@type": "ResourceCandidate",
+      "@baseType": "Candidate",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceCandidate.schema.json"
+    },
+    {
+      "id": "rc-net-002",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCandidate/rc-net-002",
+      "name": "Fortinet Firewall 100F",
+      "version": "1.2",
+      "description": "High-performance firewall appliance for secure network edge.",
+      "lastUpdate": "2025-03-05T16:00:00Z",
+      "lifecycleStatus": "active",
+      "validFor": {
+        "startDateTime": "2025-02-01T00:00:00Z",
+        "endDateTime": "2027-02-01T00:00:00Z"
+      },
+      "resourceSpecification": {
+        "id": "rs-net-401",
+        "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-net-401",
+        "name": "Firewall Spec 100F",
+        "version": "1.2",
+        "@referredType": "ResourceSpecification"
+      },
+      "category": [
+        {
+          "id": "net-cat-002",
+          "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceCategory/net-cat-002",
+          "name": "Network Equipment",
+          "@referredType": "ResourceCategory"
+        }
+      ],
+      "@type": "ResourceCandidate",
+      "@baseType": "Candidate",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceCandidate.schema.json"
+    }
+  ],
+  "resourceSpecification": [
+    {
+      "id": "rs-iot-101",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-iot-101",
+      "name": "Sensor Spec V2",
+      "version": "1.0",
+      "description": "Specification for Smart Sensor V2 with temperature and humidity measurement.",
+      "lifecycleStatus": "active",
+      "isBundle": false,
+      "lastUpdate": "2024-11-15T10:00:00Z",
+      "validFor": {
+        "startDateTime": "2024-01-01T00:00:00Z",
+        "endDateTime": "2026-01-01T00:00:00Z"
+      },
+      "specCharacteristic": [
+        {
+          "id": "sc-temp",
+          "name": "Temperature Range",
+          "description": "Operating temperature range",
+          "valueType": "string",
+          "configurable": true,
+          "characteristicValueSpecification": [
+            {
+              "valueType": "string",
+              "isDefault": true,
+              "value": "-10°C to +60°C",
+              "@type": "CharacteristicValueSpecification"
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        },
+        {
+          "id": "sc-humidity",
+          "name": "Humidity Range",
+          "description": "Humidity detection capability",
+          "valueType": "string",
+          "configurable": false,
+          "characteristicValueSpecification": [
+            {
+              "valueType": "string",
+              "value": "10% to 90% RH",
+              "@type": "CharacteristicValueSpecification"
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        }
+      ],
+      "@type": "ResourceSpecification",
+      "@baseType": "Specification",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceSpecification.schema.json"
+    },
+    {
+      "id": "rs-iot-202",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-iot-202",
+      "name": "Gateway Device Spec",
+      "version": "2.0",
+      "description": "Specification for edge gateway device supporting multiple wireless protocols.",
+      "lifecycleStatus": "active",
+      "isBundle": true,
+      "lastUpdate": "2024-12-10T14:00:00Z",
+      "validFor": {
+        "startDateTime": "2024-06-01T00:00:00Z",
+        "endDateTime": "2027-06-01T00:00:00Z"
+      },
+      "specCharacteristic": [
+        {
+          "id": "sc-protocols",
+          "name": "Supported Protocols",
+          "description": "Wireless communication protocols",
+          "valueType": "string",
+          "configurable": true,
+          "extensible": true,
+          "characteristicValueSpecification": [
+            {
+              "value": "Zigbee",
+              "valueType": "string",
+              "isDefault": false
+            },
+            {
+              "value": "LoRa",
+              "valueType": "string",
+              "isDefault": false
+            },
+            {
+              "value": "Wi-Fi",
+              "valueType": "string",
+              "isDefault": true
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        }
+      ],
+      "@type": "ResourceSpecification",
+      "@baseType": "Specification",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceSpecification.schema.json"
+    },
+    {
+      "id": "rs-net-301",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-net-301",
+      "name": "Cisco ISR Spec",
+      "version": "4.0",
+      "description": "Specification for Cisco ISR 4451 router including throughput, interfaces, and performance.",
+      "lifecycleStatus": "active",
+      "isBundle": false,
+      "lastUpdate": "2025-02-28T09:30:00Z",
+      "validFor": {
+        "startDateTime": "2025-01-01T00:00:00Z",
+        "endDateTime": "2028-01-01T00:00:00Z"
+      },
+      "specCharacteristic": [
+        {
+          "id": "sc-throughput",
+          "name": "Throughput",
+          "valueType": "integer",
+          "configurable": false,
+          "characteristicValueSpecification": [
+            {
+              "value": 1000,
+              "valueType": "integer",
+              "isDefault": true
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        },
+        {
+          "id": "sc-ports",
+          "name": "Gigabit Ports",
+          "valueType": "integer",
+          "configurable": false,
+          "characteristicValueSpecification": [
+            {
+              "value": 4,
+              "valueType": "integer",
+              "isDefault": true
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        }
+      ],
+      "@type": "ResourceSpecification",
+      "@baseType": "Specification",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceSpecification.schema.json"
+    },
+    {
+      "id": "rs-net-401",
+      "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-net-401",
+      "name": "Firewall Spec 100F",
+      "version": "1.2",
+      "description": "Firewall specification including supported VPN protocols and max sessions.",
+      "lifecycleStatus": "active",
+      "isBundle": false,
+      "lastUpdate": "2025-03-01T12:00:00Z",
+      "validFor": {
+        "startDateTime": "2025-02-01T00:00:00Z",
+        "endDateTime": "2027-02-01T00:00:00Z"
+      },
+      "specCharacteristic": [
+        {
+          "id": "sc-vpn",
+          "name": "Supported VPN Protocols",
+          "valueType": "string",
+          "configurable": false,
+          "characteristicValueSpecification": [
+            {
+              "value": "IPSec",
+              "valueType": "string"
+            },
+            {
+              "value": "SSL",
+              "valueType": "string"
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        },
+        {
+          "id": "sc-maxSessions",
+          "name": "Max Concurrent Sessions",
+          "valueType": "integer",
+          "configurable": false,
+          "characteristicValueSpecification": [
+            {
+              "value": 200000,
+              "valueType": "integer",
+              "isDefault": true
+            }
+          ],
+          "@type": "SpecCharacteristic"
+        }
+      ],
+      "@type": "ResourceSpecification",
+      "@baseType": "Specification",
+      "@schemaLocation": "https://example.com/tmf-api/schema/ResourceSpecification.schema.json"
+    }
+  ],
+  "resource": [
+    {
+      "id": "res-001",
+      "href": "https://api.example.com/resourceInventory/v4/resource/res-001",
+      "name": "Sensor Device 01",
+      "category": "IoT Device",
+      "description": "Temperature and humidity sensor deployed in zone A1",
+      "startOperatingDate": "2024-05-01T00:00:00Z",
+      "endOperatingDate": "2029-05-01T00:00:00Z",
+      "resourceVersion": "1.0.0",
+      "administrativeState": "unlocked",
+      "operationalState": "enable",
+      "resourceStatus": "available",
+      "usageState": "idle",
+      "resourceSpecification": {
+        "id": "rspec-001",
+        "href": "https://api.example.com/resourceCatalog/v4/resourceSpecification/rspec-001",
+        "name": "Basic Sensor Specification",
+        "@type": "ResourceSpecification",
+        "@referredType": "ResourceSpecification"
+      },
+      "resourceCharacteristic": [
+        {
+          "name": "temperatureRange",
+          "value": "-10 to 50°C",
+          "valueType": "string"
+        },
+        {
+          "name": "humidityRange",
+          "value": "20 to 90%",
+          "valueType": "string"
+        },
+        {
+          "name": "batteryLevel",
+          "value": 85,
+          "valueType": "number"
+        }
+      ],
+      "relatedParty": [
+        {
+          "id": "party-001",
+          "name": "DeviceCo Inc.",
+          "role": "manufacturer",
+          "href": "https://api.example.com/party/party-001",
+          "@referredType": "Organization"
+        }
+      ],
+      "place": {
+        "id": "place-001",
+        "name": "Warehouse A1",
+        "role": "installationLocation",
+        "href": "https://api.example.com/place/place-001",
+        "@referredType": "Place"
+      },
+      "@baseType": "Resource",
+      "@type": "PhysicalResource",
+      "@schemaLocation": "https://example.com/schema/resource-schema.json"
+    },
+    {
+      "id": "res-002",
+      "href": "https://api.example.com/resourceInventory/v4/resource/res-002",
+      "name": "IoT Gateway Hub - Floor 3",
+      "category": "IoT Gateway",
+      "description": "Gateway device managing wireless sensor network on floor 3",
+      "startOperatingDate": "2024-06-15T08:00:00Z",
+      "endOperatingDate": "2029-06-15T08:00:00Z",
+      "resourceVersion": "2.0.0",
+      "administrativeState": "unlocked",
+      "operationalState": "enable",
+      "resourceStatus": "available",
+      "usageState": "busy",
+      "resourceSpecification": {
+        "id": "rs-iot-202",
+        "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-iot-202",
+        "name": "Gateway Device Spec",
+        "version": "2.0",
+        "@type": "ResourceSpecification",
+        "@referredType": "ResourceSpecification"
+      },
+      "resourceCharacteristic": [
+        {
+          "name": "Supported Protocols",
+          "value": [
+            "Zigbee",
+            "LoRa",
+            "Wi-Fi"
+          ],
+          "valueType": "array"
+        },
+        {
+          "name": "Firmware Version",
+          "value": "v2.3.1",
+          "valueType": "string"
+        },
+        {
+          "name": "Last Maintenance Date",
+          "value": "2025-01-10T10:30:00Z",
+          "valueType": "dateTime"
+        }
+      ],
+      "relatedParty": [
+        {
+          "id": "vendor-5678",
+          "name": "GatewayTech Ltd.",
+          "role": "vendor",
+          "href": "https://api.example.com/party/vendor-5678",
+          "@referredType": "Organization"
+        }
+      ],
+      "place": {
+        "id": "loc-003",
+        "name": "Building B - Floor 3",
+        "role": "installationLocation",
+        "href": "https://api.example.com/place/loc-003",
+        "@referredType": "Place"
+      },
+      "@baseType": "Resource",
+      "@type": "PhysicalResource",
+      "@schemaLocation": "https://example.com/schema/resource-schema.json"
+    }
+  ],
+  "resourceOrder": [
+    {
+      "id": "ro-1001",
+      "href": "https://api.example.com/resourceOrdering/v4/resourceOrder/ro-1001",
+      "externalId": "client-ext-2025-001",
+      "priority": "High",
+      "description": "Order to deploy a new IoT sensor and connect it via gateway hub on floor 3.",
+      "category": "Provisioning",
+      "state": "acknowledged",
+      "orderDate": "2025-04-01T10:00:00Z",
+      "requestedStartDate": "2025-04-05T08:00:00Z",
+      "requestedCompletionDate": "2025-04-06T17:00:00Z",
+      "expectedCompletionDate": "2025-04-06T16:00:00Z",
+      "startDate": "2025-04-05T08:00:00Z",
+      "completionDate": null,
+      "cancellationDate": null,
+      "cancellationReason": null,
+      "notificationContact": "ops-team@example.com",
+      "relatedParty": [
+        {
+          "id": "cust-7890",
+          "name": "Acme Corp",
+          "role": "customer",
+          "href": "https://api.example.com/party/cust-7890",
+          "@referredType": "Organization"
+        }
+      ],
+      "resourceOrderItem": [
+        {
+          "id": "item-001",
+          "action": "add",
+          "state": "acknowledged",
+          "quantity": 1,
+          "resource": {
+            "name": "IoT Sensor - Zone A2",
+            "category": "Sensor",
+            "description": "Environmental sensor for Zone A2",
+            "resourceSpecification": {
+              "id": "rs-iot-101",
+              "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-iot-101",
+              "name": "Sensor Spec V2",
+              "@type": "ResourceSpecification",
+              "@referredType": "ResourceSpecification"
+            },
+            "resourceCharacteristic": [
+              {
+                "name": "temperatureRange",
+                "value": "-10 to 60°C",
+                "valueType": "string"
+              },
+              {
+                "name": "humidityRange",
+                "value": "15% to 95%",
+                "valueType": "string"
+              }
+            ]
+          }
+        },
+        {
+          "id": "item-002",
+          "action": "modify",
+          "state": "acknowledged",
+          "quantity": 1,
+          "resource": {
+            "id": "res-002",
+            "href": "https://api.example.com/resourceInventory/v4/resource/res-002",
+            "name": "IoT Gateway Hub - Floor 3",
+            "category": "IoT Gateway",
+            "description": "Existing IoT Gateway to be updated with new sensor registration",
+            "resourceSpecification": {
+              "id": "rs-iot-202",
+              "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-iot-202",
+              "name": "Gateway Device Spec",
+              "@type": "ResourceSpecification",
+              "@referredType": "ResourceSpecification"
+            },
+            "resourceCharacteristic": [
+              {
+                "name": "Supported Protocols",
+                "value": [
+                  "Zigbee",
+                  "LoRa",
+                  "Wi-Fi"
+                ],
+                "valueType": "array"
+              },
+              {
+                "name": "Firmware Version",
+                "value": "v2.4.0",
+                "valueType": "string"
+              }
+            ]
+          }
+        }
+      ],
+      "@baseType": "ResourceOrder",
+      "@type": "ResourceOrder",
+      "@schemaLocation": "https://example.com/schema/ResourceOrder.schema.json"
+    },
+    {
+      "id": "837d",
+      "requestedStartDate": "2025-03-28T19:47:16.847Z",
+      "requestedCompletionDate": "2025-03-28T19:47:16.847Z",
+      "resourceOrderItem": [
+        {
+          "resource": {
+            "id": "res-002",
+            "name": "IoT Gateway Hub - Floor 3",
+            "category": "IoT Gateway",
+            "resourceType": "",
+            "isResourceEnabled": "",
+            "state": "",
+            "resourceSpecification": {
+              "id": "rs-iot-202",
+              "href": "https://example.com/tmf-api/resourceCatalog/v4/resourceSpecification/rs-iot-202",
+              "name": "Gateway Device Spec",
+              "version": "2.0",
+              "@type": "ResourceSpecification",
+              "@referredType": "ResourceSpecification"
+            },
+            "resourceCharacteristic": [
+              {
+                "name": "Supported Protocols",
+                "value": "Zigbee,LoRa,Wi-Fi",
+                "valueType": "array"
+              },
+              {
+                "name": "Firmware Version",
+                "value": "v2.3.1",
+                "valueType": "string"
+              },
+              {
+                "name": "Last Maintenance Date",
+                "value": "2025-01-10T10:30:00Z",
+                "valueType": "dateTime"
+              }
+            ]
+          },
+          "action": "add",
+          "quantity": "1",
+          "id": "mxlys2yi3"
+        }
+      ],
+      "externalId": "test",
+      "description": "test",
+      "category": "test",
+      "priority": "test",
+      "notificationContact": "test",
+      "orderDate": "2025-03-28T19:47:14.806Z",
+      "state": "pending"
+    }
+  ],
+  "cancelResourceOrder": [
+    {
+      "id": "cancel-order-001",
+      "href": "https://api.example.com/resourceOrdering/v4/cancelResourceOrder/cancel-order-001",
+      "cancellationReason": "Customer requested termination due to service migration",
+      "effectiveCancellationDate": "2025-04-02T00:00:00Z",
+      "requestedCancellationDate": "2025-04-01T10:00:00Z",
+      "state": "acknowledged",
+      "resourceOrder": {
+        "id": "ro-1001",
+        "href": "https://api.example.com/resourceOrdering/v4/resourceOrder/resource-order-12345",
+        "name": "IoT Sensor Provisioning Order",
+        "@referredType": "ResourceOrder"
+      },
+      "@baseType": "CancelResourceOrder",
+      "@schemaLocation": "https://api.example.com/schema/CancelResourceOrder.schema.json",
+      "@type": "CancelResourceOrder"
+    }
+  ]
+}

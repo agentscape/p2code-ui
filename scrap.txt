@@ -1,0 +1,626 @@
+"use client";
+
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+} from "@mui/material";
+import { Edit } from "@refinedev/mui";
+import { useForm } from "@refinedev/react-hook-form";
+import { useState } from "react";
+
+export default function ServiceCatalogEdit() {
+  const {
+    saveButtonProps,
+    register,
+    formState: { errors },
+  } = useForm({});
+  const [lifecycleStatus, setLifecycleStatus] = useState("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setLifecycleStatus(event.target.value as string);
+  };
+
+  return (
+    <Edit saveButtonProps={saveButtonProps}>
+      <Box
+        component="form"
+        sx={{ display: "flex", flexDirection: "column" }}
+        autoComplete="off"
+      >
+        <TextField
+          {...register("name", {
+            required: "This field is required",
+          })}
+          error={!!(errors as any)?.name}
+          helperText={(errors as any)?.name?.message}
+          margin="normal"
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+          type="text"
+          label="Name"
+        />
+
+        <TextField
+          {...register("description", {
+            required: "This field is required",
+          })}
+          error={!!(errors as any)?.description}
+          helperText={(errors as any)?.description?.message}
+          margin="normal"
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+          type="text"
+          label="Description"
+        />
+
+        <TextField
+          {...register("version", {
+            required: "This field is required",
+          })}
+          error={!!(errors as any)?.version}
+          helperText={(errors as any)?.version?.message}
+          margin="normal"
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+          type="text"
+          label="Version"
+        />
+
+        <FormControl sx={{ mt: 1 }}>
+          <InputLabel id={"lifecycle-select-label"}>
+            Lifecycle Status
+          </InputLabel>
+          <Select
+            labelId="lifecycle-select-label"
+            id="lifecycle-select"
+            value={lifecycleStatus}
+            label="Lifecycle Status"
+            onChange={handleChange}
+          >
+            <MenuItem value={"in_study"}>In study</MenuItem>
+            <MenuItem value={"in_design"}>In design</MenuItem>
+            <MenuItem value={"in_test"}>In test</MenuItem>
+            <MenuItem value={"active"}>Active</MenuItem>
+            <MenuItem value={"rejected"}>Rejected</MenuItem>
+            <MenuItem value={"launched"}>Launched</MenuItem>
+            <MenuItem value={"retired"}>Retired</MenuItem>
+            <MenuItem value={"obsolete"}>Obsolete</MenuItem>
+          </Select>
+        </FormControl>
+
+        <TextField
+          {...register("lifecycleStatus", {
+            required: "This field is required",
+          })}
+          error={!!(errors as any)?.lifecycleStatus}
+          helperText={(errors as any)?.lifecycleStatus?.message}
+          margin="normal"
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+          type="text"
+          label="Lifecycle Status"
+        />
+      </Box>
+    </Edit>
+  );
+}
+
+
+
+
+
+
+
+        <Typography variant="subtitle1" sx={{ mt: 3 }}>
+          Related Parties
+        </Typography>
+        {fields.map((item, index) => (
+          <Box
+            key={`relatedParty_${index}`}
+            sx={{ p: 2, border: "1px solid #ccc", mb: 2 }}
+          >
+            <TextField
+              label="ID"
+              fullWidth
+              {...register(`relatedParty.${index}.id`)}
+              margin="dense"
+            />
+            <TextField
+              label="Name"
+              fullWidth
+              {...register(`relatedParty.${index}.name`)}
+              margin="dense"
+            />
+            <TextField
+              label="Role"
+              fullWidth
+              {...register(`relatedParty.${index}.role`)}
+              margin="dense"
+            />
+            <TextField
+              label="Href"
+              fullWidth
+              {...register(`relatedParty.${index}.href`)}
+              margin="dense"
+            />
+            <Button onClick={() => remove(index)} color="error">
+              Remove
+            </Button>
+          </Box>
+        ))}
+
+
+
+
+
+
+
+
+
+
+
+"use client";
+
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Container,
+  Fab,
+  Grid2,
+  Paper,
+  Stack,
+  Step,
+  StepLabel,
+  Stepper,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { Link, useList } from "@refinedev/core";
+import React, { useId, useState } from "react";
+import { NavigateNext, OpenInNew, Telegram } from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
+import { useForm } from "@refinedev/react-hook-form";
+import { Controller } from "react-hook-form";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
+import AskQuestionCard from "@components/ask-question-card";
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  color: theme.palette.text.secondary,
+  maxWidth: 400,
+  ...theme.applyStyles("dark", {
+    backgroundColor: "#1A2027",
+  }),
+}));
+
+const steps = ["Select service", "Configure service", "Deploy"];
+const ServiceManagementPage = () => {
+  const {
+    getValues,
+    saveButtonProps,
+    refineCore: { onFinish, formLoading, query },
+    register,
+    setValue,
+    handleSubmit,
+    resetField,
+    control,
+    formState: { errors },
+  } = useForm({
+    refineCoreProps: {
+      dataProviderName: "serviceOrderingDataProvider",
+      resource: "serviceOrder",
+      action: "create",
+    },
+  });
+  const serviceOrderItemId = Math.random().toString(36).substr(2, 9);
+  setValue("requestedStartDate", new Date().toISOString());
+  setValue("requestedCompletionDate", new Date().toISOString());
+
+  const { data: serviceData } = useList({
+    dataProviderName: "serviceCatalogDataProvider",
+    resource: "serviceSpecification",
+    pagination: {
+      mode: "off",
+    },
+  });
+
+  const services = serviceData?.data || [];
+
+  const [selectedService, setSelectedService] = useState({
+    serviceCharacteristic: [],
+  });
+
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [skipped, setSkipped] = React.useState(new Set<number>());
+
+  const isStepOptional = (step: number) => {
+    return step === 1;
+  };
+
+  const isStepSkipped = (step: number) => {
+    return skipped.has(step);
+  };
+
+  const selectService = (id: any) => {
+    const service = services.find((srv) => srv.id === id);
+
+    // console.log(service);
+    setSelectedService((service as any) ?? { serviceCharacteristic: [] });
+
+    setValue(`serviceOrderItem[0].service.id`, service?.id ?? "");
+    setValue(`serviceOrderItem[0].service.name`, service?.name ?? "");
+    setValue(`serviceOrderItem[0].service.category`, service?.category ?? "");
+    setValue(
+      `serviceOrderItem[0].service.serviceType`,
+      service?.serviceType ?? ""
+    );
+    setValue(
+      `serviceOrderItem[0].service.isServiceEnabled`,
+      service?.isServiceEnabled ?? ""
+    );
+    setValue(`serviceOrderItem[0].service.state`, service?.state ?? "");
+    setValue(
+      `serviceOrderItem[0].service.serviceSpecification`,
+      service?.serviceSpecification ?? ""
+    );
+
+    handleNext();
+  };
+
+  const createServiceOrder = () => {
+    console.log(JSON.stringify(selectedService));
+    // handleSubmit(onFinish);
+    // handleNext();
+    alert("Service order created");
+    const values = getValues();
+    console.log(JSON.stringify(values, null, 2));
+  };
+  const handleNext = () => {
+    let newSkipped = skipped;
+    if (isStepSkipped(activeStep)) {
+      newSkipped = new Set(newSkipped.values());
+      newSkipped.delete(activeStep);
+    }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped(newSkipped);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleSkip = () => {
+    if (!isStepOptional(activeStep)) {
+      // You probably want to guard against something like this,
+      // it should never occur unless someone's actively trying to break something.
+      throw new Error("You can't skip a step that isn't optional.");
+    }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped((prevSkipped) => {
+      const newSkipped = new Set(prevSkipped.values());
+      newSkipped.add(activeStep);
+      return newSkipped;
+    });
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
+  return (
+    <Container>
+      <form onSubmit={createServiceOrder}>
+        <Box sx={{ width: "100%" }}>
+          <Stepper activeStep={activeStep}>
+            {steps.map((label, index) => {
+              const stepProps: { completed?: boolean } = {};
+              const labelProps: {
+                optional?: React.ReactNode;
+              } = {};
+              if (isStepOptional(index)) {
+                labelProps.optional = (
+                  <Typography variant="caption">Optional</Typography>
+                );
+              }
+              if (isStepSkipped(index)) {
+                stepProps.completed = false;
+              }
+              return (
+                <Step key={label} {...stepProps}>
+                  <StepLabel {...labelProps}>{label}</StepLabel>
+                </Step>
+              );
+            })}
+          </Stepper>
+          {activeStep === steps.length ? (
+            <React.Fragment>
+              <Typography sx={{ mt: 2, mb: 1 }}>
+                Service order submitted!
+              </Typography>
+              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                <Box sx={{ flex: "1 1 auto" }} />
+                <Button onClick={handleReset}>Deploy new service</Button>
+              </Box>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              {activeStep === 0 && (
+                <Grid2 container spacing={2} columns={16} margin={4}>
+                  {services?.map((srv) => (
+                    <Grid2 size={8}>
+                      <Card>
+                        <CardContent>
+                          <Link to={`/serviceSpecification/show/${srv?.id}`}>
+                            <Stack direction="row" spacing={2}>
+                              {srv?.name}
+                              <OpenInNew />
+                            </Stack>
+                          </Link>
+                          <Typography variant="body2">
+                            {srv.description}
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Button
+                            onClick={() => selectService(srv?.id)}
+                            size="small"
+                          >
+                            Select
+                          </Button>
+                        </CardActions>
+                      </Card>
+                    </Grid2>
+                  ))}
+                </Grid2>
+              )}
+              {activeStep === 1 && (
+                <Grid2 container spacing={2} columns={16} margin={4}>
+                  <Box
+                    component="form"
+                    autoComplete="off"
+                    sx={{ display: "flex", flexWrap: "wrap" }}
+                  >
+                    {selectedService?.specCharacteristic?.map(
+                      (spec: any, index: number) => (
+                        <Item sx={{ my: 1, mx: 1, p: 2 }}>
+                          <Stack
+                            key={`${selectedService?.name}${index}`}
+                            gap={1}
+                          >
+                            <Typography variant="body2" fontWeight="bold">
+                              {"Name"}
+                            </Typography>
+                            <TextField
+                              disabled
+                              fullWidth
+                              label="Name"
+                              margin="normal"
+                              defaultValue={spec?.name}
+                              {...register(
+                                `serviceOrderItem[0].service.serviceCharacteristic.${index}.name`
+                              )}
+                              slotProps={{ inputLabel: { shrink: true } }}
+                            />
+
+                            <Typography variant="body2" fontWeight="bold">
+                              {"Value"}
+                            </Typography>
+                            <TextField
+                              fullWidth
+                              label="Value"
+                              margin="normal"
+                              defaultValue={spec?.value}
+                              {...register(
+                                `serviceOrderItem[0].service.serviceCharacteristic.${index}.value`
+                              )}
+                              slotProps={{ inputLabel: { shrink: true } }}
+                            />
+
+                            <Typography variant="body2" fontWeight="bold">
+                              {"Value Type"}
+                            </Typography>
+                            <TextField
+                              disabled
+                              fullWidth
+                              label="Value Type"
+                              margin="normal"
+                              defaultValue={spec?.valueType}
+                              {...register(
+                                `serviceOrderItem[0].service.serviceCharacteristic.${index}.valueType`
+                              )}
+                              slotProps={{ inputLabel: { shrink: true } }}
+                            />
+                          </Stack>
+                        </Item>
+                      )
+                    )}
+                  </Box>
+                </Grid2>
+              )}
+              {activeStep === 2 && (
+                <Box component="form" autoComplete="off" sx={{ width: "100%" }}>
+                  <Stack gap={1}>
+                    <Typography variant="body2" fontWeight="bold">
+                      {"Complete your service order"}
+                    </Typography>
+                    <TextField
+                      fullWidth
+                      label="External Id"
+                      margin="normal"
+                      {...register(`externalId`)}
+                      slotProps={{ inputLabel: { shrink: true } }}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Description"
+                      margin="normal"
+                      slotProps={{ inputLabel: { shrink: true } }}
+                      {...register(`description`)}
+                      multiline
+                    />
+                    <TextField
+                      fullWidth
+                      label="Category"
+                      margin="normal"
+                      slotProps={{ inputLabel: { shrink: true } }}
+                      {...register(`category`)}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Priority"
+                      {...register("priority")}
+                      margin="normal"
+                      slotProps={{ inputLabel: { shrink: true } }}
+                    />
+                    <Controller
+                      name="requestedStartDate"
+                      control={control}
+                      render={({ field }) => (
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DateTimePicker
+                            label="Requested Start Date"
+                            value={dayjs(field.value)}
+                            onChange={(date) =>
+                              field.onChange(date?.toISOString())
+                            }
+                            slotProps={{
+                              textField: { fullWidth: true, margin: "normal" },
+                            }}
+                          />
+                        </LocalizationProvider>
+                      )}
+                    />
+                    <Controller
+                      name="requestedCompletionDate"
+                      control={control}
+                      render={({ field }) => (
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DateTimePicker
+                            label="Requested Completion Date"
+                            value={dayjs(field.value)}
+                            onChange={(date) =>
+                              field.onChange(date?.toISOString())
+                            }
+                            slotProps={{
+                              textField: { fullWidth: true, margin: "normal" },
+                            }}
+                          />
+                        </LocalizationProvider>
+                      )}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Notification Contact"
+                      {...register("notificationContact")}
+                      margin="normal"
+                      slotProps={{ inputLabel: { shrink: true } }}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Action"
+                      defaultValue="add"
+                      {...register("serviceOrderItem[0].action")}
+                      margin="normal"
+                      slotProps={{ inputLabel: { shrink: true } }}
+                    />
+                    <TextField
+                      fullWidth
+                      label="Quantity"
+                      type="number"
+                      {...register("serviceOrderItem[0].quantity")}
+                      margin="normal"
+                      slotProps={{
+                        inputLabel: {
+                          shrink: true,
+                        },
+                      }}
+                    />
+                    <TextField
+                      disabled
+                      fullWidth
+                      label="Order Item ID"
+                      defaultValue={serviceOrderItemId}
+                      {...register("serviceOrderItem[0].id")}
+                      margin="normal"
+                      slotProps={{ inputLabel: { shrink: true } }}
+                    />
+                    <TextField
+                      disabled
+                      fullWidth
+                      label="Order Date"
+                      defaultValue={new Date().toISOString()}
+                      {...register("orderDate")}
+                      margin="normal"
+                      slotProps={{ inputLabel: { shrink: true } }}
+                    />
+                    <TextField
+                      disabled
+                      fullWidth
+                      label="Order State"
+                      defaultValue={"pending"}
+                      {...register("state")}
+                      margin="normal"
+                      slotProps={{ inputLabel: { shrink: true } }}
+                    />
+                  </Stack>
+                </Box>
+              )}
+              <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                <Button
+                  color="inherit"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
+                  Back
+                </Button>
+
+                <Box sx={{ flex: "1 1 auto" }} />
+                {activeStep === 1 && (
+                  <Fab variant="extended" color="primary" onClick={handleNext}>
+                    <NavigateNext sx={{ mr: 1 }} />
+                    Go to deployment
+                  </Fab>
+                )}
+                {activeStep === 2 && (
+                  <Fab variant="extended" color="primary" type="submit">
+                    <Telegram sx={{ mr: 1 }} />
+                    Deploy
+                  </Fab>
+                )}
+                {/* <Button onClick={handleNext}>
+                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              </Button> */}
+              </Box>
+            </React.Fragment>
+          )}
+        </Box>
+      </form>
+      <Box
+        sx={{
+          pt: 2,
+          alignItems: "center",
+        }}
+      >
+        <AskQuestionCard />
+      </Box>
+    </Container>
+  );
+};
+
+export default ServiceManagementPage;

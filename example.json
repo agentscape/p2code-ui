@@ -1,0 +1,207 @@
+{
+	"orderDate": "2024-05-14T10:11:43Z",
+	"completionDate": null,
+	"expectedCompletionDate": "2025-04-03T16:30:53Z",
+	"requestedCompletionDate": "2025-04-03T16:30:53Z",
+	"requestedStartDate": "2024-10-17T13:43:43Z",
+	"startDate": "2024-05-14T10:11:43Z",
+	"@baseType": "BaseRootEntity",
+	"state": "INITIAL",
+	"@schemaLocation": null,
+	"@type": "ServiceOrder",
+	"href": null,
+	"category": null,
+	"description": "A service order for the Kubernetes cluster",
+	"externalId": null,
+	"notificationContact": null,
+	"priority": null,
+	"note": [],
+	"serviceOrderItem": [
+		{
+			"@baseType": "BaseEntity",
+			"@schemaLocation": null,
+			"@type": null,
+			"href": null,
+			"action": "add",
+			"orderItemRelationship": [],
+			"state": "ACKNOWLEDGED",
+			"service": {
+				"serviceSpecification": {
+					"@baseType": "BaseEntity",
+					"@schemaLocation": null,
+					"@type": null,
+					"href": null,
+					"name": "service-spec-end-user-cfs",
+					"version": "1.2.0",
+					"targetServiceSchema": null,
+					"@referredType": null,
+					"id": "bb4f3d66-5350-49ea-8b31-ff325f149200"
+				},
+				"@baseType": "BaseEntity",
+				"@schemaLocation": null,
+				"@type": null,
+				"href": null,
+				"name": "service-spec-end-user-cfs",
+				"category": null,
+				"serviceType": null,
+				"place": [],
+				"relatedParty": [],
+				"serviceCharacteristic": [
+					{
+						"@baseType": "BaseRootEntity",
+						"@schemaLocation": null,
+						"@type": null,
+						"href": null,
+						"name": "Service name",
+						"valueType": "TEXT",
+						"value": {
+							"value": "CMS",
+							"alias": null
+						}
+					},
+					{
+						"@baseType": "BaseRootEntity",
+						"@schemaLocation": null,
+						"@type": null,
+						"href": null,
+						"name": "Service package manager",
+						"valueType": "ENUM",
+						"value": {
+							"value": "helm",
+							"alias": null
+						}
+					},
+					{
+						"@baseType": "BaseRootEntity",
+						"@schemaLocation": null,
+						"@type": null,
+						"href": null,
+						"name": "Base service registry/repository URL",
+						"valueType": "TEXT",
+						"value": {
+							"value": "https://charts.bitnami.com/bitnami",
+							"alias": null
+						}
+					},
+					{
+						"@baseType": "BaseRootEntity",
+						"@schemaLocation": null,
+						"@type": null,
+						"href": null,
+						"name": "Service artifact identifier in service registry/repository",
+						"valueType": "TEXT",
+						"value": {
+							"value": "nginx",
+							"alias": null
+						}
+					},
+					{
+						"@baseType": "BaseRootEntity",
+						"@schemaLocation": null,
+						"@type": null,
+						"href": null,
+						"name": "Service artifact version",
+						"valueType": "TEXT",
+						"value": {
+							"value": "19.0.3",
+							"alias": null
+						}
+					},
+					{
+						"@baseType": "BaseRootEntity",
+						"@schemaLocation": null,
+						"@type": null,
+						"href": null,
+						"name": "Cluster Manager",
+						"valueType": "ENUM",
+						"value": {
+							"value": "Kubernetes",
+							"alias": null
+						}
+					}
+				],
+				"state": "feasibilityChecked",
+				"supportingResource": [],
+				"serviceRelationship": [],
+				"supportingService": []
+			},
+			"appointment": null
+		},
+		{
+			"@baseType": "BaseEntity",
+			"@schemaLocation": null,
+			"@type": null,
+			"href": null,
+			"action": "add",
+			"orderItemRelationship": [],
+			"state": "ACKNOWLEDGED",
+			"service": {
+				"serviceSpecification": {
+					"@baseType": "BaseEntity",
+					"@schemaLocation": null,
+					"@type": null,
+					"href": null,
+					"name": "K8aaS:Openslice-dev",
+					"version": "1.2.0",
+					"targetServiceSchema": null,
+					"@referredType": null,
+					"id": "c04f3d66-5350-49ea-8b31-ff325f149232"
+				},
+				"@baseType": "BaseEntity",
+				"@schemaLocation": null,
+				"@type": null,
+				"href": null,
+				"name": "K8aaS:Openslice-dev",
+				"category": null,
+				"serviceType": null,
+				"place": [],
+				"relatedParty": [],
+				"serviceCharacteristic": [
+					{
+						"@baseType": "BaseRootEntity",
+						"@schemaLocation": null,
+						"@type": null,
+						"href": null,
+						"name": "Flavor of Nodes",
+						"valueType": "ENUM",
+						"value": {
+							"value": "cpu4.m8192.d20g",
+							"alias": null
+						}
+					},
+					{
+						"@baseType": "BaseRootEntity",
+						"@schemaLocation": null,
+						"@type": null,
+						"href": null,
+						"name": "Number of worker nodes",
+						"valueType": "TEXT",
+						"value": {
+							"value": "1",
+							"alias": null
+						}
+					}
+				],
+				"state": "feasibilityChecked",
+				"supportingResource": [],
+				"serviceRelationship": [],
+				"supportingService": []
+			},
+			"appointment": null
+		}
+	],
+	"orderRelationship": [],
+	"relatedParty": [
+		{
+			"@baseType": "BaseRootEntity",
+			"@schemaLocation": null,
+			"@type": null,
+			"href": null,
+			"name": "UBITECH",
+			"role": "REQUESTER",
+			"@referredType": "SimpleUsername_Individual",
+			"id": "2c034f2b-4ecc-44cc-9af3-6633aa96b217",
+			"extendedInfo": null
+		}
+	]
+}
