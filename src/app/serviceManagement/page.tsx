@@ -17,89 +17,162 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { NavigateNext, OpenInNew, Telegram } from "@mui/icons-material";
 import { useForm, Controller } from "react-hook-form";
 
-import AskQuestionCard from "@components/ask-question-card";
-import { Link } from "@refinedev/core";
+import { Link, useNotification } from "@refinedev/core";
 import { JsonViewer } from "@textea/json-viewer";
+import {
+  fetchAggregatedServices,
+  makeServiceOrder,
+  ServiceItem,
+} from "@app/actions";
+import { CategoryServiceConfigurator } from "@components/category-service-configurator";
+
+interface Category {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export function buildServiceOrder(
+  meta: {
+    description: string;
+    requestedStartDate: string;
+    requestedCompletionDate: string;
+  },
+  configuredServices: ServiceItem[],
+  relatedPartyId: string = "2c034f2b-4ecc-44cc-9af3-6633aa96b217",
+  relatedPartyName: string = "UBITECH"
+) {
+  const now = new Date().toISOString();
+  const future = new Date(Date.now() + 1000 * 60 * 60 * 24 * 180).toISOString(); // ~6 months later
+
+  const serviceOrderItems = configuredServices.map((service) => ({
+    "@baseType": "BaseEntity",
+    "@schemaLocation": null,
+    "@type": null,
+    href: null,
+    action: "add",
+    orderItemRelationship: [],
+    state: "ACKNOWLEDGED",
+    appointment: null,
+    service: {
+      serviceSpecification: {
+        "@baseType": "BaseEntity",
+        "@schemaLocation": null,
+        "@type": null,
+        href: null,
+        name: service.name,
+        version: service.version || "1.0.0",
+        targetServiceSchema: null,
+        "@referredType": null,
+        id: service.serviceSpecificationId,
+      },
+      "@baseType": "BaseEntity",
+      "@schemaLocation": null,
+      "@type": null,
+      href: null,
+      name: service.name,
+      category: null,
+      serviceType: null,
+      place: [],
+      relatedParty: [],
+      supportingResource: [],
+      serviceRelationship: [],
+      supportingService: [],
+      state: "feasibilityChecked",
+      serviceCharacteristic: service.characteristics.map((char) => ({
+        "@baseType": "BaseRootEntity",
+        "@schemaLocation": null,
+        "@type": null,
+        href: null,
+        name: char.name,
+        valueType: char.valueType,
+        value: {
+          value: char.value,
+          alias: null,
+        },
+      })),
+    },
+  }));
+
+  return {
+    orderDate: now,
+    completionDate: null,
+    expectedCompletionDate: null,
+    requestedCompletionDate: meta.requestedCompletionDate,
+    requestedStartDate: meta.requestedStartDate,
+    startDate: null,
+    "@baseType": "BaseRootEntity",
+    state: "INITIAL",
+    "@schemaLocation": null,
+    "@type": "ServiceOrder",
+    href: null,
+    category: null,
+    description: meta.description,
+    externalId: null,
+    notificationContact: null,
+    priority: null,
+    note: [],
+    serviceOrderItem: serviceOrderItems,
+    orderRelationship: [],
+    relatedParty: [
+      {
+        "@baseType": "BaseRootEntity",
+        "@schemaLocation": null,
+        "@type": null,
+        href: null,
+        name: relatedPartyName,
+        role: "REQUESTER",
+        "@referredType": "SimpleUsername_Individual",
+        id: relatedPartyId,
+        extendedInfo: null,
+      },
+    ],
+  };
+}
 
 const steps = ["Select service", "Configure service", "Deploy"];
 const ServiceManagementPage = () => {
-  const services = [
-    {
-      id: 1,
-      description: "A service order for the Kubernetes cluster",
-      defaultValues: {
-        orderDate: new Date().toISOString().slice(0, 19),
-        requestedCompletionDate: new Date().toISOString().slice(0, 19),
-        requestedStartDate: new Date().toISOString().slice(0, 19),
-        description: "A service order for the Kubernetes cluster",
-        serviceOrderItems: [
-          {
-            name: "service-spec-end-user-cfs",
-            version: "1.2.0",
-            id: "bb4f3d66-5350-49ea-8b31-ff325f149200",
-            characteristics: [
-              { name: "Service name", value: "CMS", valueType: "TEXT" },
-              {
-                name: "Service package manager",
-                value: "helm",
-                valueType: "ENUM",
-              },
-              {
-                name: "Base service registry/repository URL",
-                value: "https://charts.bitnami.com/bitnami",
-                valueType: "TEXT",
-              },
-              {
-                name: "Service artifact identifier in service registry/repository",
-                value: "nginx",
-                valueType: "TEXT",
-              },
-              {
-                name: "Service artifact version",
-                value: "19.0.3",
-                valueType: "TEXT",
-              },
-              {
-                name: "Cluster Manager",
-                value: "Kubernetes",
-                valueType: "ENUM",
-              },
-            ],
-          },
-          {
-            name: "K8aaS:Openslice-dev",
-            version: "1.2.0",
-            id: "c04f3d66-5350-49ea-8b31-ff325f149232",
-            characteristics: [
-              {
-                name: "Flavor of Nodes",
-                value: "cpu4.m8192.d20g",
-                valueType: "ENUM",
-              },
-              { name: "Number of worker nodes", value: "1", valueType: "TEXT" },
-            ],
-          },
-        ],
-      },
-    },
-  ];
-
-  const [selectedService, setSelectedService] = useState<any>({
-    defaultValues: {
-      serviceOrderItems: [
-        {
-          characteristics: [],
-        },
-      ],
-    },
+  const [isLoading, setLoading] = useState(true);
+  const [allServices, setAllServices] = useState<ServiceItem[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [configuredServices, setConfiguredServices] = useState<ServiceItem[]>(
+    []
+  );
+  const [meta, setMeta] = useState({
+    description: "",
+    requestedStartDate: "",
+    requestedCompletionDate: "",
   });
-  const selectService = (service: any) => {
-    // const service = services.find((srv) => srv.externalId === id);
-    setSelectedService(service ?? {});
+
+  const [isPending, startTransition] = useTransition();
+  const { open, close } = useNotification();
+
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  useEffect(() => {
+    fetchAggregatedServices().then((data) => {
+      setAllServices(data);
+
+      const seen = new Map<string, Category>();
+      for (const item of Object.values(data)) {
+        if (!seen.has(item.categoryId)) {
+          seen.set(item.categoryId, {
+            id: item.categoryId,
+            name: item.category,
+            description: item.description,
+          });
+        }
+      }
+      setCategories(Array.from(seen.values()));
+      setLoading(false);
+    });
+  }, []);
+  const selectService = (categoryId: string) => {
+    setSelectedCategory(categoryId);
     handleNext();
   };
 
@@ -144,113 +217,34 @@ const ServiceManagementPage = () => {
     setActiveStep(0);
   };
 
-  const { control, handleSubmit, reset, getValues } = useForm({
-    defaultValues: selectedService?.defaultValues || {},
-  });
-
-  useEffect(() => {
-    if (selectedService) {
-      reset({
-        ...selectedService.defaultValues, // prefill the form
-      });
-    }
-  }, [selectedService, reset]);
-
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     console.log(data);
-    const payload = {
-      orderDate: new Date(data.orderDate).toISOString(),
-      completionDate: null,
-      expectedCompletionDate: null,
-      requestedCompletionDate: new Date(
-        data.requestedCompletionDate
-      ).toISOString(),
-      requestedStartDate: new Date(data.requestedStartDate).toISOString(),
-      startDate: null,
-      "@baseType": "BaseRootEntity",
-      state: "INITIAL",
-      "@schemaLocation": null,
-      "@type": "ServiceOrder",
-      href: null,
-      category: null,
-      description: data.description,
-      externalId: null,
-      notificationContact: null,
-      priority: null,
-      note: [],
-      serviceOrderItem: data.serviceOrderItems.map((item: any) => ({
-        "@baseType": "BaseEntity",
-        "@schemaLocation": null,
-        "@type": null,
-        href: null,
-        action: "add",
-        orderItemRelationship: [],
-        state: "ACKNOWLEDGED",
-        service: {
-          serviceSpecification: {
-            "@baseType": "BaseEntity",
-            "@schemaLocation": null,
-            "@type": null,
-            href: null,
-            name: item.name,
-            version: item.version,
-            targetServiceSchema: null,
-            "@referredType": null,
-            id: item.id,
-          },
-          "@baseType": "BaseEntity",
-          "@schemaLocation": null,
-          "@type": null,
-          href: null,
-          name: item.name,
-          category: null,
-          serviceType: null,
-          place: [],
-          relatedParty: [],
-          serviceCharacteristic: item.characteristics.map((c: any) => ({
-            "@baseType": "BaseRootEntity",
-            "@schemaLocation": null,
-            "@type": null,
-            href: null,
-            name: c.name,
-            valueType: c.valueType,
-            value: {
-              value: c.value,
-              alias: null,
-            },
-          })),
-          state: "feasibilityChecked",
-          supportingResource: [],
-          serviceRelationship: [],
-          supportingService: [],
-        },
-        appointment: null,
-      })),
-      orderRelationship: [],
-      relatedParty: [
-        {
-          "@baseType": "BaseRootEntity",
-          "@schemaLocation": null,
-          "@type": null,
-          href: null,
-          name: "UBITECH",
-          role: "REQUESTER",
-          "@referredType": "SimpleUsername_Individual",
-          id: "2c034f2b-4ecc-44cc-9af3-6633aa96b217",
-          extendedInfo: null,
-        },
-      ],
-    };
-
-    console.log(JSON.stringify(payload, null, 2));
   };
 
   const deployServiceOrder = () => {
-    alert("Deploying service order");
-    handleSubmit(onSubmit)();
+    const serviceOrder = buildServiceOrder(meta, configuredServices);
+
+    startTransition(async () => {
+      const result = await makeServiceOrder(serviceOrder);
+
+      if (result.success) {
+        open?.({
+          type: "success",
+          message: "Success",
+          description: "Successfully submitted service order",
+        });
+      } else {
+        open?.({
+          type: "error",
+          message: "Error",
+          description: "There has been an error submitting the service order",
+        });
+      }
+    });
 
     handleNext();
   };
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <Container>
@@ -290,7 +284,7 @@ const ServiceManagementPage = () => {
           <React.Fragment>
             {activeStep === 0 && (
               <Grid2 container spacing={2} columns={16} margin={4}>
-                {services?.map((srv, index) => (
+                {categories?.map((srv, index) => (
                   <Grid2 size={8} key={index}>
                     <Card>
                       <CardContent>
@@ -300,12 +294,22 @@ const ServiceManagementPage = () => {
                             <OpenInNew />
                           </Stack>
                         </Link> */}
+                        <Typography>{srv.name}</Typography>
+                        <Link to={`/serviceCategory/show/${srv.id}`}>
+                          <Stack direction="row" spacing={2}>
+                            {srv.id}
+                            <OpenInNew />
+                          </Stack>
+                        </Link>
                         <Typography variant="body2">
                           {srv.description}
                         </Typography>
                       </CardContent>
                       <CardActions>
-                        <Button onClick={() => selectService(srv)} size="small">
+                        <Button
+                          onClick={() => selectService(srv.id)}
+                          size="small"
+                        >
                           Select
                         </Button>
                       </CardActions>
@@ -316,122 +320,34 @@ const ServiceManagementPage = () => {
             )}
             {activeStep === 1 && (
               <Grid2 container spacing={2} columns={16} margin={4}>
-                {selectedService && (
-                  <Container maxWidth="md" sx={{ py: 4 }}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12} sm={6}>
-                        <Controller
-                          name="orderDate"
-                          control={control}
-                          render={({ field }) => (
-                            <TextField
-                              {...field}
-                              label="Order Date"
-                              type="datetime-local"
-                              fullWidth
-                            />
-                          )}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <Controller
-                          name="requestedCompletionDate"
-                          control={control}
-                          render={({ field }) => (
-                            <TextField
-                              {...field}
-                              label="Requested Completion Date"
-                              type="datetime-local"
-                              fullWidth
-                            />
-                          )}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <Controller
-                          name="requestedStartDate"
-                          control={control}
-                          render={({ field }) => (
-                            <TextField
-                              {...field}
-                              label="Requested Start Date"
-                              type="datetime-local"
-                              fullWidth
-                            />
-                          )}
-                        />
-                      </Grid>
-
-                      <Grid item xs={12}>
-                        <Controller
-                          name="description"
-                          control={control}
-                          render={({ field }) => (
-                            <TextField
-                              {...field}
-                              label="Description"
-                              fullWidth
-                              multiline
-                            />
-                          )}
-                        />
-                      </Grid>
-                      <Typography variant="h6" sx={{ ml: 2, mt: 3 }}>
-                        Service Specifications
-                      </Typography>
-                      {selectedService?.defaultValues?.serviceOrderItems?.map(
-                        (serviceOrderItem: any, oIndex: number) => (
-                          <Grid item xs={12} key={oIndex}>
-                            <Typography variant="subtitle1" sx={{}}>
-                              {serviceOrderItem.name}
-                              {", "}
-                              version {serviceOrderItem.version}
-                              <Link
-                                to={`/serviceSpecification/show/${serviceOrderItem.id}`}
-                              >
-                                <Stack direction="row" spacing={2}>
-                                  {serviceOrderItem.id}
-                                  <OpenInNew />
-                                </Stack>
-                              </Link>
-                            </Typography>
-
-                            {serviceOrderItem?.characteristics?.map(
-                              (characteristic: any, cIndex: number) => (
-                                <Grid item xs={12} key={cIndex} sx={{ mt: 2 }}>
-                                  <Controller
-                                    name={`serviceOrderItems.${oIndex}.characteristics.${cIndex}.value`}
-                                    control={control}
-                                    render={({ field }) => (
-                                      <TextField
-                                        {...field}
-                                        label={characteristic.name}
-                                        fullWidth
-                                        // defaultValue={characteristic.value}
-                                      />
-                                    )}
-                                  />
-                                </Grid>
-                              )
-                            )}
-                          </Grid>
-                        )
-                      )}
-                    </Grid>
-                  </Container>
-                )}
+                <CategoryServiceConfigurator
+                  categoryId={selectedCategory}
+                  allServices={allServices}
+                  onChange={(services, meta) => {
+                    setConfiguredServices(services);
+                    setMeta(meta);
+                  }}
+                />
               </Grid2>
             )}
             {activeStep === 2 && (
               <Grid2 container spacing={2} columns={16} margin={4}>
-                {selectedService && (
-                  <Container maxWidth="md" sx={{ py: 4 }}>
-                    <Typography variant="h6" sx={{ mb: 3 }}>
-                      ServiceOrder Input Values
-                    </Typography>
-                    <JsonViewer value={getValues()} rootName={false} />
-                  </Container>
-                )}
+                {/* <pre className="bg-gray-100 p-4 rounded mt-6">
+                  {JSON.stringify(
+                    buildServiceOrder(configuredServices),
+                    null,
+                    2
+                  )}
+                </pre> */}
+                <Container maxWidth="md" sx={{ py: 4 }}>
+                  <Typography variant="h6" sx={{ mb: 3 }}>
+                    Service Order
+                  </Typography>
+                  <JsonViewer
+                    value={buildServiceOrder(meta, configuredServices)}
+                    rootName={false}
+                  />
+                </Container>
               </Grid2>
             )}
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
@@ -474,7 +390,7 @@ const ServiceManagementPage = () => {
           alignItems: "center",
         }}
       >
-        <AskQuestionCard />
+        {/* <AskQuestionCard /> */}
       </Box>
     </Container>
   );

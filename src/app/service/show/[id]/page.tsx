@@ -188,7 +188,11 @@ export default function ServiceShow() {
                       <Typography variant="body2" fontWeight="bold">
                         {"Value"}
                       </Typography>
-                      <TextField value={spec?.value?.value} />
+                      <TextField
+                        value={spec?.value?.value}
+                        overflow="hidden"
+                        textOverflow="ellipsis"
+                      />
 
                       <Typography variant="body2" fontWeight="bold">
                         {"Value Type"}
