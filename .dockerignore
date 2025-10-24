@@ -5,3 +5,6 @@ npm-debug.log
 .coverage
 .coverage.*
 .env
+
+*.tar
+*.tar.gz
