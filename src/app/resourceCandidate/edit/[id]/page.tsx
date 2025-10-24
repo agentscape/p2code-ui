@@ -232,7 +232,7 @@ export default function ResourceCandidateEdit() {
             onChange={changeSpecification}
           >
             {resourceSpecifications.map((spec) => (
-              <MenuItem value={spec.id}>{spec.name}</MenuItem>
+              <MenuItem key={spec.id} value={spec.id}>{spec.name}</MenuItem>
             ))}
           </Select>
         </FormControl>

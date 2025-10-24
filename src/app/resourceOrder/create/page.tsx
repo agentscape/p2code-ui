@@ -128,7 +128,7 @@ const Resource = ({
             onChange={changeResource}
           >
             {resources.map((srv) => (
-              <MenuItem value={srv.id}>{srv.name}</MenuItem>
+              <MenuItem key={srv.id} value={srv.id}>{srv.name}</MenuItem>
             ))}
           </Select>
         </FormControl>

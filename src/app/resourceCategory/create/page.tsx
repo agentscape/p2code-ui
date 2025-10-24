@@ -203,7 +203,7 @@ export default function ResourceCategoryCreate() {
             onChange={addCandidate}
           >
             {resourceCandidates.map((candidate) => (
-              <MenuItem value={candidate.id}>{candidate.name}</MenuItem>
+              <MenuItem key={candidate.id} value={candidate.id}>{candidate.name}</MenuItem>
             ))}
           </Select>
         </FormControl>

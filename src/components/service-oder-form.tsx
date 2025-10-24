@@ -255,6 +255,7 @@ export default function ServiceOrderForm() {
 
       {fields.map((item, index) => (
         <Controller
+          key={index}
           name={`serviceOrderItems.${index}.id`}
           control={control}
           render={({ field }) => (

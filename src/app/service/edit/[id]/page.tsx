@@ -40,6 +40,9 @@ export default function ServiceEdit() {
   } = useList({
     resource: "resource",
     dataProviderName: "resourceInventoryDataProvider",
+    pagination: {
+      mode: "off",
+    },
   });
   const resources = resourceData?.data ?? [];
 
@@ -49,6 +52,9 @@ export default function ServiceEdit() {
     isError: serviceIsError,
   } = useList({
     resource: "service",
+    pagination: {
+      mode: "off",
+    },
   });
   const services = serviceData?.data ?? [];
 
@@ -58,6 +64,9 @@ export default function ServiceEdit() {
     isError: specificationsIsError,
   } = useList({
     resource: "serviceSpecification",
+    pagination: {
+      mode: "off",
+    },
   });
   const serviceSpecifications = specificationsData?.data ?? [];
 
@@ -369,6 +378,8 @@ export default function ServiceEdit() {
                     "launched",
                     "retired",
                     "obsolete",
+                    "inactive",
+                    "terminated",
                   ].map((status) => (
                     <MenuItem key={status} value={status}>
                       {status}
@@ -430,7 +441,7 @@ export default function ServiceEdit() {
             onChange={changeSpecification}
           >
             {serviceSpecifications.map((spec) => (
-              <MenuItem value={spec.id}>{spec.name}</MenuItem>
+              <MenuItem key={spec.id} value={spec.id}>{spec.name}</MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -727,7 +738,7 @@ export default function ServiceEdit() {
             onChange={addSupportingResource}
           >
             {resources.map((resource) => (
-              <MenuItem value={resource.id}>{resource.name}</MenuItem>
+              <MenuItem key={resource.id} value={resource.id}>{resource.name}</MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -777,7 +788,7 @@ export default function ServiceEdit() {
             onChange={addSupportingService}
           >
             {services.map((service) => (
-              <MenuItem value={service.id}>{service.name}</MenuItem>
+              <MenuItem key={service.id} value={service.id}>{service.name}</MenuItem>
             ))}
           </Select>
         </FormControl>

@@ -23,10 +23,10 @@ export async function getAccessToken() {
 
   const params = new URLSearchParams();
   params.append("grant_type", "password");
-  params.append("client_id", "tmf-api");
-  params.append("client_secret", "supersecret");
-  params.append("username", "age");
-  params.append("password", "supersecret");
+  params.append("client_id", process.env.KEYCLOAK_CLIENT_ID || "tmf-api");
+  params.append("client_secret", process.env.KEYCLOAK_CLIENT_SECRET || "");
+  params.append("username", process.env.KEYCLOAK_USERNAME || "");
+  params.append("password", process.env.KEYCLOAK_PASSWORD || "");
 
   const response = await fetch(tokenUrl, {
     method: "POST",

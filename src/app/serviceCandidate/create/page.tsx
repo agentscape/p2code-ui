@@ -220,7 +220,7 @@ export default function ServiceCandidateCreate() {
             onChange={changeSpecification}
           >
             {serviceSpecifications.map((spec) => (
-              <MenuItem value={spec.id}>{spec.name}</MenuItem>
+              <MenuItem key={spec.id} value={spec.id}>{spec.name}</MenuItem>
             ))}
           </Select>
         </FormControl>

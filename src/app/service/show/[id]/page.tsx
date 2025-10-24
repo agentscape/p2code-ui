@@ -178,7 +178,7 @@ export default function ServiceShow() {
             <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3 }}>
               {record?.serviceCharacteristic?.map(
                 (spec: any, index: number) => (
-                  <Item sx={{ my: 1, p: 2 }}>
+                  <Item key={index} sx={{ my: 1, p: 2 }}>
                     <Stack key={index} gap={1} sx={{ pl: 2 }}>
                       <Typography variant="body2" fontWeight="bold">
                         {"Name"}
@@ -257,7 +257,7 @@ export default function ServiceShow() {
                     <Box sx={{ flexGrow: 1, overflow: "hidden", px: 3 }}>
                       {feat?.featureCharacteristic?.map(
                         (spec: any, index: number) => (
-                          <Item sx={{ my: 1, p: 2 }}>
+                          <Item key={index} sx={{ my: 1, p: 2 }}>
                             <Stack key={index} gap={1} sx={{ pl: 2 }}>
                               <Typography variant="body2" fontWeight="bold">
                                 {"Name"}

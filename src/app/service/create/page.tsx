@@ -430,7 +430,7 @@ export default function ServiceCreate() {
             onChange={changeSpecification}
           >
             {serviceSpecifications.map((spec) => (
-              <MenuItem value={spec.id}>{spec.name}</MenuItem>
+              <MenuItem key={spec.id} value={spec.id}>{spec.name}</MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -727,7 +727,7 @@ export default function ServiceCreate() {
             onChange={addSupportingResource}
           >
             {resources.map((resource) => (
-              <MenuItem value={resource.id}>{resource.name}</MenuItem>
+              <MenuItem key={resource.id} value={resource.id}>{resource.name}</MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -777,7 +777,7 @@ export default function ServiceCreate() {
             onChange={addSupportingService}
           >
             {services.map((service) => (
-              <MenuItem value={service.id}>{service.name}</MenuItem>
+              <MenuItem key={service.id} value={service.id}>{service.name}</MenuItem>
             ))}
           </Select>
         </FormControl>

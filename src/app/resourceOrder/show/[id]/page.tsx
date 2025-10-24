@@ -156,7 +156,7 @@ export default function ResourceOrderShow() {
               <Grid2 container spacing={2}>
                 {record?.resourceOrderItem?.map(
                   (orderItem: any, index: number) => (
-                    <Grid2 size={4}>
+                    <Grid2 key={index} size={4}>
                       <Item sx={{ my: 1, p: 2 }}>
                         <Stack key={index} gap={1} sx={{ pl: 2 }}>
                           <Typography variant="body2" fontWeight="bold">
@@ -250,7 +250,7 @@ export default function ResourceOrderShow() {
                             <AccordionDetails>
                               {orderItem?.resource?.resourceCharacteristic.map(
                                 (element: any, index: number) => (
-                                  <Item sx={{ my: 1, p: 2 }}>
+                                  <Item key={index} sx={{ my: 1, p: 2 }}>
                                   <Stack key={index} gap={1} sx={{ pl: 2 }}>
                                     <Typography
                                       variant="body2"

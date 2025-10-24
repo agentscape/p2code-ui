@@ -183,7 +183,7 @@ export default function CancelResourceOrderEdit() {
             onChange={changeResourceOrder}
           >
             {resourceOrders.map((resourceOrder) => (
-              <MenuItem value={resourceOrder.id}>{resourceOrder.id}</MenuItem>
+              <MenuItem key={resourceOrder.id} value={resourceOrder.id}>{resourceOrder.id}</MenuItem>
             ))}
           </Select>
         </FormControl>

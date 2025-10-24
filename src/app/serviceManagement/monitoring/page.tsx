@@ -10,11 +10,11 @@ import { DashboardCard } from "@components/dashboard-card";
 const dashboards = [
   {
     title: "System Metrics",
-    link: "https://mimir.incode.daiconro.eu/public-dashboards/2047415283b7437ab86e4ca1945ae634?theme=light",
+    link: "https://mimir.incode.daiconro.eu/public-dashboards/d6ed1cbcae3f438eafd47c5c2be43dc8?from=2025-07-04T09:16:59.855Z&to=2025-07-04T09:37:55.469Z&timezone=browser&theme=light",
   },
   {
     title: "Application Monitoring",
-    link: "https://mimir.incode.daiconro.eu/public-dashboards/2047415283b7437ab86e4ca1945ae634?theme=light",
+    link: "https://mimir.incode.daiconro.eu/public-dashboards/d6ed1cbcae3f438eafd47c5c2be43dc8?from=2025-07-04T09:16:59.855Z&to=2025-07-04T09:37:55.469Z&timezone=browser&theme=light",
   },
 ];
 
@@ -30,7 +30,7 @@ const DevOpsDashboard = () => {
     <Box sx={{ p: 4 }}>
       <Grid2 container spacing={4} columns={16} margin={4}>
         {dashboards.map((dashboard, index) => (
-          <Grid2 size={8}>
+          <Grid2 key={index} size={8}>
             <DashboardCard title={dashboard.title} link={dashboard.link} />
           </Grid2>
         ))}

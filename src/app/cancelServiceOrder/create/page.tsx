@@ -201,7 +201,7 @@ export default function CancelServiceOrderCreate() {
                       label="Service Order Id"
                     >
                       {serviceOrders.map((order) => (
-                        <MenuItem value={order.id}>{order.id}</MenuItem>
+                        <MenuItem key={order.id} value={order.id}>{order.id}</MenuItem>
                       ))}
                     </Select>
                   </FormControl>

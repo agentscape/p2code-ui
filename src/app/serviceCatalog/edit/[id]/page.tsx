@@ -232,7 +232,7 @@ export default function ServiceCatalogEdit() {
             onChange={addCategory}
           >
             {serviceCategories.map((category) => (
-              <MenuItem value={category.id}>{category.name}</MenuItem>
+              <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
             ))}
           </Select>
         </FormControl>

@@ -148,7 +148,7 @@ export default function ResourceShow() {
               <Grid2 container spacing={2}>
                 {record?.resourceCharacteristic?.map(
                   (spec: any, index: number) => (
-                    <Grid2
+                    <Grid2 key={index}
                       size={4}
                     >
                       <Item sx={{ my: 1, p: 2 }}>

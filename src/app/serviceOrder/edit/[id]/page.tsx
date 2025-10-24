@@ -129,7 +129,7 @@ const Service = ({
           onChange={changeService}
         >
           {services.map((srv) => (
-            <MenuItem value={srv.id}>{srv.name}</MenuItem>
+            <MenuItem key={srv.id} value={srv.id}>{srv.name}</MenuItem>
           ))}
         </Select>
       </FormControl>

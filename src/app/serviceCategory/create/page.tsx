@@ -206,7 +206,7 @@ export default function ServiceCategoryCreate() {
             onChange={addCandidate}
           >
             {serviceCandidates.map((candidate) => (
-              <MenuItem value={candidate.id}>{candidate.name}</MenuItem>
+              <MenuItem key={candidate.id} value={candidate.id}>{candidate.name}</MenuItem>
             ))}
           </Select>
         </FormControl>

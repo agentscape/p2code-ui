@@ -187,8 +187,8 @@ const ResourceManagementPage = () => {
           <React.Fragment>
             {activeStep === 0 && (
               <Grid2 container spacing={2} columns={16} margin={4}>
-                {resources?.map((srv) => (
-                  <Grid2 size={8}>
+                {resources?.map((srv, index) => (
+                  <Grid2 key={index} size={8}>
                     <Card>
                       <CardContent>
                         <Link to={`/resource/show/${srv?.id}`}>
@@ -223,7 +223,7 @@ const ResourceManagementPage = () => {
                 >
                   {selectedResource?.resourceCharacteristic?.map(
                     (spec: any, index: number) => (
-                      <Item sx={{ my: 1, mx: 1, p: 2 }}>
+                      <Item key={index} sx={{ my: 1, mx: 1, p: 2 }}>
                         <Stack key={index} gap={1}>
                           <Typography variant="body2" fontWeight="bold">
                             {"Name"}

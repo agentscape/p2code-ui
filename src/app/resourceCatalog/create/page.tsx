@@ -196,7 +196,7 @@ export default function ResourceCatalogEdit() {
             onChange={addCategory}
           >
             {resourceCategories.map((category) => (
-              <MenuItem value={category.id}>{category.name}</MenuItem>
+              <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
             ))}
           </Select>
         </FormControl>
